@@ -1,0 +1,6 @@
+@media screen and (max-width: 576px) {
+    .bg-color{
+        background-color: #012b26;
+        z-index: 2;
+    }
+}

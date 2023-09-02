@@ -1,10 +1,8 @@
 import React from 'react';
 
-const Button = ({children}) => {
+const Button = ({ children }) => {
     return (
-        <div>
-            <button className='bg-secondary text-white px-6 py-2 rounded-md font-medium'>{children}</button>
-        </div>
+        <button className='btn btn-secondary text-white px-6 capitalize rounded-md font-medium'>{children}</button>
     );
 };
 
