@@ -5,12 +5,12 @@ const OurServiceCard = ({ item }) => {
     const { name, image, description, details } = item;
 
     return (
-        <div>
+        <div className='mt-8'>
             <img src={image} alt="" />
-            <h2 className=' text-neutral font-semibold text-2xl'>{name}</h2>
-            <p className='text-accent text-sm'>{description}</p>
-            <p className='text-accent text-sm'>{details}</p>
-            <Button>More Details</Button>
+            <h2 className=' text-neutral font-semibold text-2xl mt-5 mb-4'>{name}</h2>
+            <p className='text-accent text-sm mb-3'>{description}</p>
+            <p className='text-accent text-sm mb-6'>{details}</p>
+            <Button>Appointment</Button>
         </div>
     );
 };
