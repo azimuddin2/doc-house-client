@@ -36,7 +36,7 @@ const OurServices = () => {
     }
 
     return (
-        <section className='max-w-screen-lg lg:mx-auto mx-4 my-20 text-center lg:text-left'>
+        <section className='max-w-screen-lg lg:mx-auto mx-5 my-20 text-center lg:text-left'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
                 <div>
                     <img src={doctor} alt="Doctor" className='' />
