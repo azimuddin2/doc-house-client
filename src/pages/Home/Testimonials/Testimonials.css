@@ -1,0 +1,43 @@
+.swiper-button-prev {
+    left: 0% !important;
+    background-color: #F7A582;
+    border-radius: 100px;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+}
+
+.swiper-button-next {
+    left: 96% !important;
+    background-color: #F7A582;
+    width: 40px;
+    height: 40px;
+    border-radius: 100px;
+    text-align: center;
+}
+
+
+/* responsive tablet device */
+@media screen and (min-width: 577px) and (max-width: 991px) {
+    .swiper-button-prev {
+        left: 80% !important;
+    }
+    
+    .swiper-button-next {
+        left: 87% !important;
+    }
+}
+
+
+/* responsive mobile device */
+@media screen and (max-width: 576px) {
+    .swiper-button-prev {
+        left: 12% !important;
+        top: 6%;
+    }
+
+    .swiper-button-next {
+        left: 26% !important;
+        top: 6%;
+    }
+}
