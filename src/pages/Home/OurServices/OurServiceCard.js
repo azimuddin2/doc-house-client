@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from '../../Shared/Button/Button';
+import { Link } from 'react-router-dom';
 
 const OurServiceCard = ({ item }) => {
     const { name, image, description, details } = item;
@@ -10,7 +10,9 @@ const OurServiceCard = ({ item }) => {
             <h2 className=' text-neutral font-semibold text-2xl mt-5 mb-4'>{name}</h2>
             <p className='text-accent text-sm mb-3'>{description}</p>
             <p className='text-accent text-sm mb-6'>{details}</p>
-            <Button>Appointment</Button>
+            <Link className='group'>
+                <button className='btn btn-outline btn-secondary group-hover:text-white capitalize'>Appointment</button>
+            </Link>
         </div>
     );
 };
