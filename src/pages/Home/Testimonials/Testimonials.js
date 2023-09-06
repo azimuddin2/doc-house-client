@@ -1,6 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { A11y, Autoplay, Navigation, Pagination } from 'swiper/modules';
+import { A11y, Autoplay, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import "swiper/css/navigation";
 import 'swiper/css/pagination';
@@ -52,19 +52,12 @@ const Testimonials = () => {
         <section className='max-w-screen-lg lg:mx-auto mx-5 my-20'>
             <div className='text-center'>
                 <h1 className='font-bold text-3xl lg:text-4xl leading-snug text-neutral'>What Our Patients Says</h1>
-                <p className='lg:w-3/5 mx-auto text-accent leading-7 mt-3 capitalize text-sm'>The Majority Have Suffered Alteration In Some Form, By Injected Humour, Or Randomised Words Which Don't Look Even Slightly Believable.</p>
+                <p className='lg:w-3/5 mx-auto text-accent leading-6 mt-3 capitalize text-sm'>The Majority Have Suffered Alteration In Some Form, By Injected Humour, Or Randomised Words Which Don't Look Even Slightly Believable.</p>
             </div>
             <Swiper 
                 style={{
-                    "--swiper-pagination-color": "#F7A582",
-                    "--swiper-pagination-bullet-inactive-color": "#999999",
-                    "--swiper-pagination-bullet-inactive-opacity": "1",
-                    "--swiper-pagination-bullet-size": "12px",
-                    "--swiper-pagination-bullet-horizontal-gap": "3px",
-
                     "--swiper-navigation-color": "#fff",
                     "--swiper-navigation-size": "18px",
-                    // "--swiper-navigation-top-offset": "6%"
                 }}
                 className="mySwiper"
                 breakpoints={{
@@ -84,14 +77,13 @@ const Testimonials = () => {
 
                     },
                 }}
-                modules={[A11y, Pagination, Navigation, Autoplay]}
+                modules={[A11y, Navigation, Autoplay]}
                 spaceBetween={24}
                 autoplay={{
                     delay: 2500,
                     disableOnInteraction: false,
                 }}
                 navigation={true}
-                pagination={{ clickable: true }}
             >
                 <div>
                     {

@@ -7,16 +7,14 @@ const ExpertDoctor = ({ expertDoctor }) => {
 
     return (
         <div className="card border">
-            <figure className="px-5 pt-5">
-                <img src={image} alt="Shoes" className="rounded-xl" />
+            <figure className="p-5">
+                <img src={image} alt={name} />
             </figure>
-            <div className="card-body px-5 p-0">
-
-
+            <div className="card-body px-5 p-0 pb-5">
                 <div style={{ borderBottom: '1px solid #F3F3F3' }}>
-                    <h2 className="card-title text-neutral">{name}</h2>
-                    <p>{job}</p>
-                    <div className="rating mt-0">
+                    <h2 className="card-title text-neutral text-xl font-semibold">{name}</h2>
+                    <p className=' text-accent text-base'>{job}</p>
+                    <div className="rating my-2">
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400 w-4 mr-1" />
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400 w-4 mr-1" />
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400 w-4 mr-1" />
@@ -24,25 +22,26 @@ const ExpertDoctor = ({ expertDoctor }) => {
                         <input type="radio" name="rating-2" className="mask mask-star-2 bg-orange-400 w-4 mr-1" />
                     </div>
                 </div>
-
-                <div>
-                    <p className='flex items-center'>
-                        <HiOutlineLocationMarker className=' text-2xl text-accent mr-2'></HiOutlineLocationMarker>
-                        <span className='text-accent text-sm'>{location}</span>
+                <div className='my-2'>
+                    <p className='flex items-center mb-2'>
+                        <HiOutlineLocationMarker className='text-2xl text-accent mr-2'></HiOutlineLocationMarker>
+                        <span className='text-accent text-base'>{location}</span>
+                    </p>
+                    <p className='flex items-center mb-2'>
+                        <MdOutlineDateRange className='text-2xl text-accent mr-2'></MdOutlineDateRange>
+                        <span className='text-accent text-base'>{date}</span>
                     </p>
                     <p className='flex items-center'>
-                        <MdOutlineDateRange className=' text-2xl text-accent mr-2'></MdOutlineDateRange>
-                        <span className='text-accent text-sm'>{date}</span>
-                    </p>
-                    <p className='flex items-center'>
-                        <HiOutlineCurrencyDollar className=' text-2xl text-accent mr-2'></HiOutlineCurrencyDollar>
-                        <span className='text-accent text-sm'>{price}</span>
+                        <HiOutlineCurrencyDollar className='text-2xl text-accent mr-2'></HiOutlineCurrencyDollar>
+                        <span className='text-accent text-base'>{price}</span>
                     </p>
                 </div>
-
-
                 <div className="card-actions group w-full">
-                    <button className={`${button} capitalize w-full`}>View Profile</button>
+                    <button
+                        className={button ? 'btn btn-secondary text-white capitalize w-full' : 'btn btn-outline btn-secondary group-hover:text-white capitalize w-full'}
+                    >
+                        View Profile
+                    </button>
                 </div>
             </div>
         </div>

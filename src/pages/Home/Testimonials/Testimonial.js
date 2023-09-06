@@ -5,7 +5,7 @@ const Testimonial = ({testimonial}) => {
     const {image, name, location} = testimonial;
 
     return (
-        <div className="card p-6 border mb-14 mt-20 lg:mt-12 ">
+        <div className="card p-6 border mt-20 lg:mt-8 ">
             <div className='flex items-center justify-between'>
                 <div className='md:flex items-center'>
                     <div className="avatar">

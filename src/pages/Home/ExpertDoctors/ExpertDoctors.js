@@ -24,7 +24,7 @@ const ExpertDoctors = () => {
 
     return (
         <section className='max-w-screen-lg lg:mx-auto mx-5 mb-20'>
-            <div className='text-center'>
+            <div className='text-center mb-8'>
                 <h1 className='font-bold text-3xl lg:text-4xl leading-snug text-neutral'>Our Expert Doctors</h1>
                 <p className='lg:w-3/4 mx-auto text-accent leading-6 mt-3 capitalize text-sm'>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inve ntore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
             </div>
