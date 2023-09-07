@@ -1,16 +1,11 @@
 import React from 'react';
-import ReactLoading from 'react-loading';
+import { ClockLoader } from 'react-spinners';
 
 const Loading = () => {
     return (
-        <div
-        // className='my-5 d-flex justify-content-center align-items-center'
-        >
-            <ReactLoading
-                type='bars'
-                color='#f91944'
-                height='60px'
-                width='60px'
+        <div className='my-24 flex items-center justify-center'>
+            <ClockLoader
+                color="#07332F"
             />
         </div>
     );

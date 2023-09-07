@@ -5,7 +5,7 @@ import ContactForm from './ContactForm';
 
 const ContactUs = () => {
     return (
-        <section className='max-w-screen-lg lg:mx-auto mx-5 mb-20'>
+        <section className='max-w-screen-lg lg:mx-auto mx-5 my-10 lg:my-20'>
             <div className='bg-primary text-white py-10 px-6 lg:p-20 rounded-lg'>
                 <div className='lg:flex'>
                     <div className='lg:w-2/5 lg:pr-5 lg:text-left text-center'>

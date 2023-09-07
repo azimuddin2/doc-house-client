@@ -49,7 +49,7 @@ const Testimonials = () => {
     ];
 
     return (
-        <section className='max-w-screen-lg lg:mx-auto mx-5 my-20'>
+        <section className='max-w-screen-lg lg:mx-auto mx-5 my-10 lg:my-20'>
             <div className='text-center'>
                 <h1 className='font-bold text-3xl lg:text-4xl leading-snug text-neutral'>What Our Patients Says</h1>
                 <p className='lg:w-3/5 mx-auto text-accent leading-6 mt-3 capitalize text-sm'>The Majority Have Suffered Alteration In Some Form, By Injected Humour, Or Randomised Words Which Don't Look Even Slightly Believable.</p>

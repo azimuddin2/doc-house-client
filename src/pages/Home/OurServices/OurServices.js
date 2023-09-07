@@ -32,16 +32,16 @@ const OurServices = () => {
     }
 
     if (error) {
-        return <p style={{ color: '#f91944', textAlign: 'center' }}>error: {error.message}</p>
+        return <p className='my-10' style={{ color: '#f91944', textAlign: 'center' }}>error: {error.message}</p>
     }
 
     return (
-        <section className='max-w-screen-lg lg:mx-auto mx-5 my-20 text-center lg:text-left'>
+        <section className='max-w-screen-lg lg:mx-auto mx-5 my-12 lg:my-20 text-center lg:text-left'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
                 <div>
                     <img src={doctor} alt="Doctor" className='' />
                 </div>
-                <div className='mt-10'>
+                <div className='lg:mt-10'>
                     <div>
                         <h2 className=' text-4xl text-neutral font-bold'>Our Services</h2>
                         <p className='my-5 text-sm text-accent'>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inve ntore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
