@@ -6,15 +6,3 @@
     background-color: rgba(255, 255, 255, 0.05);
     color: white;
 }
-
-.react-datepicker__input-container {
-    display: flex;
-    align-items: center;
-}
-
-.react-datepicker__input-container .react-datepicker__calendar-icon {
-    position: absolute;
-    padding: 0px !important;
-    color: white !important;
-    right: 14px;
-}
