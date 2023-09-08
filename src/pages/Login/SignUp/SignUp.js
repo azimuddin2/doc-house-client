@@ -8,8 +8,10 @@ import medicine from '../../../assets/Images/medicine.png';
 import medicine2 from '../../../assets/Images/medicine2.png';
 import logo from '../../../assets/Images/dark-logo.png';
 import './SignUp.css';
+import useTitle from '../../../hooks/useTitle';
 
 const SignUp = () => {
+    useTitle('SignUp')
     const [showPassword, setShowPassword] = useState(false);
 
     return (

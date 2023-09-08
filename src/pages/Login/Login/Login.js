@@ -8,8 +8,10 @@ import { Link } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
+import useTitle from '../../../hooks/useTitle';
 
 const Login = () => {
+    useTitle('Login');
     const [showPassword, setShowPassword] = useState(false);
 
     return (
