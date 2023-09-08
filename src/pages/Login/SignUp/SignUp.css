@@ -1,0 +1,13 @@
+.sign-show-password {
+    position: absolute;
+    top: 373px;
+    right: 52px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+    .sign-show-password {
+        position: absolute;
+        right: 26px;
+    }
+}

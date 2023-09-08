@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import ReactDatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import './ContactForm.css';
+import { MdOutlineDateRange } from 'react-icons/md';
 
 const ContactForm = () => {
     const [selectDate, setSelectDate] = useState(new Date());
@@ -89,7 +90,7 @@ const ContactForm = () => {
                         required
                     />
                 </div>
-                <div>
+                <div className='relative'>
                     <ReactDatePicker
                         name='date'
                         className="w-full input input-bordered focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
@@ -98,6 +99,7 @@ const ContactForm = () => {
                         onChange={(date) => setSelectDate(date)}
                         dateFormat='Pp'
                     ></ReactDatePicker>
+                    <MdOutlineDateRange className='text-xl mr-2 absolute right-1 top-3'></MdOutlineDateRange>
                 </div>
                 <div>
                     <select

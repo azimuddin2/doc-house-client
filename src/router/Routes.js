@@ -2,6 +2,7 @@ import Main from "../layout/Main";
 import Home from "../pages/Home/Home/Home";
 import OurServices from "../pages/Home/OurServices/OurServices";
 import Login from "../pages/Login/Login/Login";
+import SignUp from "../pages/Login/SignUp/SignUp";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
     {
         path: 'login',
         element: <Login></Login>
+    },
+    {
+        path: 'signup',
+        element: <SignUp></SignUp>
     },
 
 ]);

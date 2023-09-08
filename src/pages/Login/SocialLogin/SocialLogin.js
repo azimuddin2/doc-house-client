@@ -3,7 +3,7 @@ import { FcGoogle } from 'react-icons/fc';
 
 const SocialLogin = () => {
     return (
-        <div className='px-4 md:px-10 lg:px-10'>
+        <div className='px-4 md:px-10 lg:px-10 mt-3'>
             <div className="divider mt-0">Or</div>
             <button
                 // onClick={handleSignInWithGoogle}

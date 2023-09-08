@@ -1,0 +1,13 @@
+.login-show-password {
+    position: absolute;
+    top: 273px;
+    right: 52px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 576px) {
+    .login-show-password {
+        position: absolute;
+        right: 26px;
+    }
+}
