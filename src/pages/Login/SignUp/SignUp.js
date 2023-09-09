@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -9,10 +9,30 @@ import medicine2 from '../../../assets/Images/medicine2.png';
 import logo from '../../../assets/Images/dark-logo.png';
 import './SignUp.css';
 import useTitle from '../../../hooks/useTitle';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
     useTitle('SignUp')
+    const { createUser } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const form = event.target;
+        const name = form.name.value;
+        const email = form.email.value;
+        const password = form.password.value;
+
+        createUser(email, password)
+            .then((result) => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                toast.error(error.message);
+            })
+    };
 
     return (
         <section className='grid grid-cols-1 lg:grid-cols-2'>
@@ -37,7 +57,10 @@ const SignUp = () => {
                 </Link>
                 <div className="card border py-10">
                     <h1 className="text-4xl font-semibold text-center">SignUp</h1>
-                    <form className="card-body px-4 md:px-10 lg:px-10 pb-0">
+                    <form
+                        onSubmit={handleSubmit}
+                        className="card-body px-4 md:px-10 lg:px-10 pb-0"
+                    >
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-semibold text-neutral text-lg">Name</span>
