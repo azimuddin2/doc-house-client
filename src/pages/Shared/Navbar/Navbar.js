@@ -1,16 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/Images/logo.png';
 import CustomLink from './CustomLink';
 import './Navbar.css';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
+    const { user, logout } = useContext(AuthContext);
+
+    const handleLogout = () => {
+        logout()
+            .then(() => { })
+            .catch(error => {
+                toast.error(error.message);
+            })
+    };
 
     const menuItem = <>
         <li><CustomLink to='/'>Home</CustomLink></li>
         <li><CustomLink to='/about'>About</CustomLink></li>
         <li><CustomLink to='/appointment'>Appointment</CustomLink></li>
-        <li><CustomLink to='/login'>Login</CustomLink></li>
+        <li>
+            {
+                user?.uid ?
+                    <button
+                        onClick={handleLogout}
+                        style={{ backgroundColor: '#F7A582', color: '#fff' }}
+                        className='btn btn-sm bg-secondary capitalize border-none px-5 rounded-sm group-hover:opacity-100'
+                    >
+                        Logout
+                    </button>
+                    :
+                    <CustomLink to='/login'>Login</CustomLink>
+            }
+        </li>
     </>
 
     return (
@@ -30,7 +54,7 @@ const Navbar = () => {
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex items-center">
-                    <ul className="menu menu-horizontal p-0 text-white">
+                    <ul className="flex items-center menu menu-horizontal p-0 text-white">
                         {menuItem}
                     </ul>
                 </div>

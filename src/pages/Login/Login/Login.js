@@ -1,21 +1,25 @@
 import React, { useContext, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import SocialLogin from '../SocialLogin/SocialLogin';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import useTitle from '../../../hooks/useTitle';
+import { AuthContext } from '../../../providers/AuthProvider';
+import { toast } from 'react-toastify';
 import frame from '../../../assets/Images/frame.png';
 import frame1 from '../../../assets/Images/frame1.png';
 import medicine from '../../../assets/Images/medicine.png';
 import medicine2 from '../../../assets/Images/medicine2.png';
 import logo from '../../../assets/Images/dark-logo.png';
-import { Link } from 'react-router-dom';
-import SocialLogin from '../SocialLogin/SocialLogin';
-import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import './Login.css';
-import useTitle from '../../../hooks/useTitle';
-import { AuthContext } from '../../../providers/AuthProvider';
-import { toast } from 'react-toastify';
 
 const Login = () => {
     useTitle('Login');
     const { signIn } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -26,7 +30,9 @@ const Login = () => {
         signIn(email, password)
             .then((result) => {
                 const user = result.user;
-                console.log(user)
+                console.log(user);
+                form.reset();
+                navigate(from, { replace: true });
             })
             .catch((error) => {
                 toast.error(error.message);
@@ -38,10 +44,10 @@ const Login = () => {
             <div className='bg-primary pb-14'>
                 <div className='flex justify-end'>
                     <img src={medicine2} alt="medicine" className='h-20 lg:h-32 absolute left-0' />
-                    <img src={frame1} alt="frame" className='w-60 lg:w-96' />
+                    <img src={frame1} alt="frame" className='w-60 lg:w-96 animate-pulse' />
                 </div>
                 <div className='flex justify-center'>
-                    <img src={medicine} alt="medicine" className='h-20 absolute ml-40 lg:ml-48 mt-4 lg:mt-12' />
+                    <img src={medicine} alt="medicine" className='h-20 absolute ml-40 lg:ml-48 mt-4 lg:mt-12 animate-bounce' />
                     <img src={frame} alt="frame" className='w-3/4 lg:w-3/5' />
                 </div>
             </div>
