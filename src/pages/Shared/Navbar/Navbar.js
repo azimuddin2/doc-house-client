@@ -27,7 +27,7 @@ const Navbar = () => {
                     <button
                         onClick={handleLogout}
                         style={{ backgroundColor: '#F7A582', color: '#fff' }}
-                        className='btn btn-sm bg-secondary capitalize border-none px-5 rounded-sm group-hover:opacity-100'
+                        className='btn btn-sm bg-secondary capitalize border-none px-5 rounded-sm group-hover:opacity-100 lg:ml-3 lg:mt-0 mt-2'
                     >
                         Logout
                     </button>
