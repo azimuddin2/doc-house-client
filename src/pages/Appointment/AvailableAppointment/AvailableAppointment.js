@@ -1,10 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { format } from 'date-fns';
-import React from 'react';
+import React, { useState } from 'react';
 import Loading from '../../Shared/Loading/Loading';
 import Service from './Service';
+import BookingModal from '../BookingModal/BookingModal';
 
 const AvailableAppointment = ({ date }) => {
+    const [treatment, setTreatment] = useState(null);
 
     const url = 'http://localhost:5000/services';
 
@@ -29,9 +31,18 @@ const AvailableAppointment = ({ date }) => {
                     services.map(service => <Service
                         key={service._id}
                         service={service}
+                        setTreatment={setTreatment}
                     ></Service>)
                 }
             </div>
+            {
+                treatment && <BookingModal
+                    treatment={treatment}
+                    setTreatment={setTreatment}
+                    date={date}
+                    refetch={refetch}
+                ></BookingModal>
+            }
         </section>
     );
 };
