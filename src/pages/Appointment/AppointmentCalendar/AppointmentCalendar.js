@@ -6,6 +6,7 @@ import 'react-day-picker/dist/style.css';
 import './AppointmentCalendar.css';
 
 const AppointmentCalendar = ({date, setDate}) => {
+    
     return (
         <section
             style={{
