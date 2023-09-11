@@ -5,11 +5,26 @@ import { AuthContext } from '../../../providers/AuthProvider';
 const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
 
     const { user } = useContext(AuthContext);
-    const { name, price, slots } = treatment;
+    const { _id, name, price, slots } = treatment;
+    const formatDate = format(date, 'PP');
 
     const handleBooking = (event) => {
         event.preventDefault();
-    }
+        const slot = event.target.slot.value;
+        const phone = event.target.phone.value;
+
+        const booking = {
+            treatmentId: _id,
+            treatment: name,
+            price,
+            date: formatDate,
+            slot,
+            patientName: user?.displayName,
+            patientEmail: user?.email,
+            patientPhone: phone,
+        };
+        console.log(booking)
+    };
 
     return (
         <div>

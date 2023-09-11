@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home/Home";
 import OurServices from "../pages/Home/OurServices/OurServices";
 import Login from "../pages/Login/Login/Login";
 import SignUp from "../pages/Login/SignUp/SignUp";
+import PrivateRoute from "./PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
 
@@ -22,7 +23,9 @@ const router = createBrowserRouter([
             },
             {
                 path: 'appointment',
-                element: <Appointment></Appointment>
+                element: <PrivateRoute>
+                    <Appointment></Appointment>
+                </PrivateRoute>
             }
         ],
     },

@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import AppointmentBanner from '../AppointmentBanner/AppointmentBanner';
 import AppointmentCalendar from '../AppointmentCalendar/AppointmentCalendar';
 import AvailableAppointment from '../AvailableAppointment/AvailableAppointment';
+import useTitle from '../../../hooks/useTitle';
 
 const Appointment = () => {
+    useTitle('Appointment');
     const [date, setDate] = useState(new Date());
 
     return (
