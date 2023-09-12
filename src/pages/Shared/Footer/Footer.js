@@ -63,7 +63,7 @@ const Footer = () => {
                 width="18"
                 height="18"
                 top="400"
-                style={{ background: "#07332F", boxShadow: 'none', borderRadius: "5px" }}
+                style={{ background: "#F7A582", boxShadow: 'none', borderRadius: "5px" }}
             />
         </footer>
     );

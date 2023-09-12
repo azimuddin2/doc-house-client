@@ -1,6 +1,7 @@
 import { format } from 'date-fns';
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../providers/AuthProvider';
+import { toast } from 'react-toastify';
 
 const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
 
@@ -23,7 +24,26 @@ const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
             patientEmail: user?.email,
             patientPhone: phone,
         };
-        console.log(booking)
+
+        fetch('http://localhost:5000/booking', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(booking)
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    toast.success(`Appointment is set, ${formatDate} at ${slot}`);
+                }
+                else {
+                    toast.error(`Already have and appointment on ${data.booking?.date} at ${data.booking?.slot}`)
+                }
+                refetch();
+                // to close the modal
+                setTreatment(null);
+            })
     };
 
     return (
@@ -40,7 +60,7 @@ const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
                         <input
                             type="text"
                             disabled
-                            defaultValue={format(date, 'PP')}
+                            value={format(date, 'PP')}
                             className="input input-bordered w-full max-w-sm text-lg"
                         />
                         <select

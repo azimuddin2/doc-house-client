@@ -8,10 +8,11 @@ import BookingModal from '../BookingModal/BookingModal';
 const AvailableAppointment = ({ date }) => {
     const [treatment, setTreatment] = useState(null);
 
-    const url = 'http://localhost:5000/services';
+    const formatDate = format(date, 'PP');
+    const url = `http://localhost:5000/available?date=${formatDate}`;
 
     const { data: services, isLoading, refetch } = useQuery({
-        queryKey: ['services'],
+        queryKey: ['available', formatDate],
         queryFn: async () => {
             const res = await fetch(url);
             const data = res.json();
