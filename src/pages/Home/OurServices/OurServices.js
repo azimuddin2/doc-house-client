@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import doctor from '../../../assets/Images/doctor.png';
-import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import Loading from '../../Shared/Loading/Loading';
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import ServiceTab from './ServiceTab';
-import './OurServices.css'; 
+import './OurServices.css';
 
 const OurServices = () => {
-    const categories = ['cosmetic-dentistry', 'oral-surgery', 'gastrology-therapy'];
-    const { category } = useParams();
-    const initialIndex = categories.indexOf(category);
-    const [tabIndex, setTabIndex] = useState(initialIndex);
+    const [tabIndex, setTabIndex] = useState(0);
 
     const { data: services, isLoading, error } = useQuery({
         queryKey: ['our-services'],
@@ -47,7 +43,7 @@ const OurServices = () => {
                         <p className='my-5 text-sm text-accent'>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inve ntore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
                     </div>
                     <div className='mt-10'>
-                        <Tabs defaultIndex={0} onSelect={(index) => setTabIndex(index)}>
+                        <Tabs defaultIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
                             <TabList>
                                 <Tab>Cosmetic Dentistry</Tab>
                                 <Tab>Oral Surgery</Tab>

@@ -1,7 +1,6 @@
 import Main from "../layout/Main";
 import Appointment from "../pages/Appointment/Appointment/Appointment";
 import Home from "../pages/Home/Home/Home";
-import OurServices from "../pages/Home/OurServices/OurServices";
 import Login from "../pages/Login/Login/Login";
 import SignUp from "../pages/Login/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
@@ -16,10 +15,6 @@ const router = createBrowserRouter([
             {
                 path: '/',
                 element: <Home></Home>
-            },
-            {
-                path: '/our-services/:category',
-                element: <OurServices></OurServices>
             },
             {
                 path: 'appointment',
