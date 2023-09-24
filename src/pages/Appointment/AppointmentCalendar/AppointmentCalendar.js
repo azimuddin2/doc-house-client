@@ -5,8 +5,8 @@ import { DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 import './AppointmentCalendar.css';
 
-const AppointmentCalendar = ({date, setDate}) => {
-    
+const AppointmentCalendar = ({ date, setDate }) => {
+
     return (
         <section
             style={{
@@ -23,7 +23,7 @@ const AppointmentCalendar = ({date, setDate}) => {
                         <img src={chair} className="lg:w-100 rounded-lg" alt='' />
                     </div>
                     <div className='flex-1'>
-                        <div className="card w-80 mx-auto lg:w-96 lg:mx-auto bg-base-100 shadow-xl">
+                        <div className="card w-80 mx-auto lg:w-96 lg:mx-auto bg-base-100 shadow-lg">
                             <div className="card-body p-1 lg:p-8 m-0">
                                 <DayPicker
                                     mode="single"
