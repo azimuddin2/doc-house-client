@@ -9,7 +9,7 @@ const CustomLink = ({ children, to, ...props }) => {
         <Link
             style={{
                 color: match ? '#F7A582' : '#F3F3F3',
-                fontWeight: match ? '600' : '400',
+                fontWeight: match ? '700' : '500',
                 borderBottom: match ? '2px solid #F7A582' : 'none',
                 borderRadius: '0',
                 marginRight: '4px'
