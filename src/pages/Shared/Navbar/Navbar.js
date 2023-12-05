@@ -5,6 +5,11 @@ import CustomLink from './CustomLink';
 import './Navbar.css';
 import { AuthContext } from '../../../providers/AuthProvider';
 import { toast } from 'react-toastify';
+import { LuLayoutDashboard } from "react-icons/lu";
+import { LuCalendarClock } from "react-icons/lu";
+import { IoHomeOutline } from "react-icons/io5";
+import { FiLogIn } from "react-icons/fi";
+import { TbMessageStar } from "react-icons/tb";
 
 const Navbar = () => {
     const { user, logout } = useContext(AuthContext);
@@ -18,22 +23,45 @@ const Navbar = () => {
     };
 
     const menuItem = <>
-        <li><CustomLink to='/'>Home</CustomLink></li>
-        <li><CustomLink to='/about'>About</CustomLink></li>
-        <li><CustomLink to='/appointment'>Appointment</CustomLink></li>
-        <li><CustomLink to='/dashboard'>Dashboard</CustomLink></li>
+        <li>
+            <CustomLink to='/'>
+                <IoHomeOutline className='text-lg lg:hidden' /> Home
+            </CustomLink>
+        </li>
+        <li>
+            <CustomLink to='/appointment'>
+                <LuCalendarClock className='text-lg lg:hidden' /> Appointment
+            </CustomLink>
+        </li>
+        <li>
+            <CustomLink to='/reviews'>
+                <TbMessageStar className='text-lg lg:hidden' />  Reviews
+            </CustomLink>
+        </li>
+
+        <li>
+            <CustomLink to='/dashboard'>
+                <LuLayoutDashboard className='text-lg lg:hidden' /> Dashboard
+            </CustomLink>
+        </li>
         <li>
             {
                 user?.uid ?
-                    <button
-                        onClick={handleLogout}
-                        style={{ backgroundColor: '#F7A582', color: '#fff' }}
-                        className='btn btn-sm bg-secondary capitalize border-none px-5 rounded-sm group-hover:opacity-100 lg:ml-3 lg:mt-0 mt-2'
-                    >
-                        Logout
-                    </button>
+                    (
+                        <button
+                            onClick={handleLogout}
+                            style={{ color: '#fff' }}
+                            className='font-medium'
+                        >
+                            <FiLogIn className='text-lg lg:hidden' /> Logout
+                        </button>
+                    )
                     :
-                    <CustomLink to='/login'>Login</CustomLink>
+                    (
+                        <CustomLink to='/login'>
+                            <FiLogIn className='text-lg lg:hidden' /> Login
+                        </CustomLink>
+                    )
             }
         </li>
     </>
