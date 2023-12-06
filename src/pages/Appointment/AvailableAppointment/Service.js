@@ -4,7 +4,7 @@ const Service = ({ service, setTreatment }) => {
     const { image, name, price, slots } = service;
 
     return (
-        <div className="card shadow-lg">
+        <div className="card shadow-md">
             <figure className="px-10 pt-10">
                 <img src={image} alt="Shoes" className="" />
             </figure>

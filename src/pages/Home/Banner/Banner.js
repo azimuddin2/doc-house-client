@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Button from '../../Shared/Button/Button';
 import dotsGroup from '../../../assets/Images/dots-group.png';
 import ellipse from '../../../assets/Images/Ellipse.png';
 import medicine from '../../../assets/Images/medicine.png';
@@ -10,6 +9,7 @@ import doctor1 from '../../../assets/Images/doctor1.png';
 import doctor2 from '../../../assets/Images/doctor2.png';
 import doctor3 from '../../../assets/Images/doctor3.png';
 import { FaArrowRight } from "react-icons/fa6";
+import Button from '../../../components/Button/Button';
 
 const Banner = () => {
     return (

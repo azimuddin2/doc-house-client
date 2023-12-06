@@ -1,11 +1,11 @@
 import { format } from 'date-fns';
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../providers/AuthProvider';
+import React from 'react';
 import { toast } from 'react-toastify';
+import useAuth from '../../../hooks/useAuth';
 
 const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
 
-    const { user } = useContext(AuthContext);
+    const { user } = useAuth();
     const { _id, name, price, slots } = treatment;
     const formatDate = format(date, 'PP');
 
