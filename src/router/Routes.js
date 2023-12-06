@@ -1,5 +1,6 @@
 import Main from "../layout/Main";
 import Appointment from "../pages/Appointment/Appointment/Appointment";
+import DoctorProfile from "../pages/DoctorProfile/DoctorProfile";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
 import SignUp from "../pages/Login/SignUp/SignUp";
@@ -26,6 +27,13 @@ const router = createBrowserRouter([
             {
                 path: 'reviews',
                 element: <Reviews></Reviews>
+            },
+            {
+                path: '/doctor-profile/:id',
+                element: <DoctorProfile></DoctorProfile>,
+                loader: async ({ params }) => {
+                    return fetch(`http://localhost:5000/doctor-profile/${params.id}`)
+                }
             }
         ],
     },

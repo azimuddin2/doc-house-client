@@ -2,10 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import Loading from '../../Shared/Loading/Loading';
 import ExpertDoctor from './ExpertDoctor';
+import ErrorElement from '../../Shared/ErrorElement/ErrorElement';
 
 const ExpertDoctors = () => {
 
-    const { data: expertDoctors, isLoading, error } = useQuery({
+    const { data: expertDoctors = [], isLoading, error } = useQuery({
         queryKey: ['expert-doctors'],
         queryFn: async () => {
             const res = await fetch('http://localhost:5000/expert-doctors');
@@ -19,7 +20,7 @@ const ExpertDoctors = () => {
     }
 
     if (error) {
-        return <p className='my-10' style={{ color: '#f91944', textAlign: 'center' }}>error: {error.message}</p>
+        return <ErrorElement message={error.message}></ErrorElement>
     }
 
     return (

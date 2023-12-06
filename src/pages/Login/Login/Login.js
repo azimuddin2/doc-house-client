@@ -1,20 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import useTitle from '../../../hooks/useTitle';
-import { AuthContext } from '../../../providers/AuthProvider';
-import { toast } from 'react-toastify';
 import frame from '../../../assets/Images/frame.png';
 import frame1 from '../../../assets/Images/frame1.png';
 import medicine from '../../../assets/Images/medicine.png';
 import medicine2 from '../../../assets/Images/medicine2.png';
 import logo from '../../../assets/Images/dark-logo.png';
 import './Login.css';
+import useAuth from '../../../hooks/useAuth';
+import swal from 'sweetalert';
 
 const Login = () => {
     useTitle('Login');
-    const { signIn } = useContext(AuthContext);
+    const { signIn } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
@@ -32,10 +32,20 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
+                swal({
+                    title: "User Login Successful!",
+                    text: `Welcome - ${user?.displayName}`,
+                    icon: "success",
+                });
                 navigate(from, { replace: true });
             })
             .catch((error) => {
-                toast.error(error.message);
+                swal({
+                    title: "Oops...",
+                    text: `${error.message}`,
+                    icon: "error",
+                    button: "Try again",
+                });
             })
     };
 

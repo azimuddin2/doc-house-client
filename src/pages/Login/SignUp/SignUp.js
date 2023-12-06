@@ -1,20 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useTitle from '../../../hooks/useTitle';
-import { AuthContext } from '../../../providers/AuthProvider';
-import { toast } from 'react-toastify';
 import frame from '../../../assets/Images/frame.png';
 import frame1 from '../../../assets/Images/frame1.png';
 import medicine from '../../../assets/Images/medicine.png';
 import medicine2 from '../../../assets/Images/medicine2.png';
 import logo from '../../../assets/Images/dark-logo.png';
 import './SignUp.css';
+import swal from 'sweetalert';
+import useAuth from '../../../hooks/useAuth';
 
 const SignUp = () => {
     useTitle('SignUp')
-    const { createUser, updateUserProfile } = useContext(AuthContext);
+    const { createUser, updateUserProfile } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
 
     const navigate = useNavigate();
@@ -34,11 +34,20 @@ const SignUp = () => {
                 console.log(user);
                 handleUpdateUserProfile(name);
                 form.reset();
-                toast.success(`${user?.email} User SignUp Successfully!!`)
+                swal({
+                    title: "User SignUp Successful!",
+                    text: `Welcome - ${name}`,
+                    icon: "success",
+                });
                 navigate(from, { replace: true });
             })
             .catch((error) => {
-                toast.error(error.message);
+                swal({
+                    title: "Oops...",
+                    text: `${error.message}`,
+                    icon: "error",
+                    button: "Try again",
+                });
             })
     };
 
@@ -49,7 +58,12 @@ const SignUp = () => {
         updateUserProfile(profile)
             .then(() => { })
             .catch(error => {
-                toast.error(error.message);
+                swal({
+                    title: "Oops...",
+                    text: `${error.message}`,
+                    icon: "error",
+                    button: "Try again",
+                });
             })
     };
 

@@ -1,9 +1,12 @@
 import React from 'react';
 import { HiOutlineLocationMarker, HiOutlineCurrencyDollar } from 'react-icons/hi'
 import { MdOutlineDateRange } from 'react-icons/md'
+import { useNavigate } from 'react-router-dom';
 
 const ExpertDoctor = ({ expertDoctor }) => {
-    const { image, name, job, location, date, price, button } = expertDoctor;
+    const { _id, image, name, job, location, date, price, button } = expertDoctor;
+
+    const navigate = useNavigate();
 
     return (
         <div className="card border">
@@ -38,6 +41,7 @@ const ExpertDoctor = ({ expertDoctor }) => {
                 </div>
                 <div className="card-actions group w-full">
                     <button
+                        onClick={() => navigate(`/doctor-profile/${_id}`)}
                         className={button ? 'btn btn-secondary text-white capitalize w-full' : 'btn btn-outline btn-secondary group-hover:text-white capitalize w-full'}
                     >
                         View Profile

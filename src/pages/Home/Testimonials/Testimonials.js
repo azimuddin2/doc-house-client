@@ -60,7 +60,7 @@ const Testimonials = () => {
             >
                 <div>
                     {
-                        reviews?.map(testimonial => <SwiperSlide className='lg:px-2' key={testimonial.id}>
+                        reviews?.map(testimonial => <SwiperSlide className='lg:px-2' key={testimonial._id}>
                             <Testimonial testimonial={testimonial}></Testimonial>
                         </SwiperSlide>)
                     }

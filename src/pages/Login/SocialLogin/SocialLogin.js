@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
-import { AuthContext } from '../../../providers/AuthProvider';
 import { GoogleAuthProvider } from 'firebase/auth';
-import { toast } from 'react-toastify';
 import { useLocation, useNavigate } from 'react-router-dom';
+import swal from 'sweetalert';
+import useAuth from '../../../hooks/useAuth';
 
 const SocialLogin = () => {
-    const { signInWithGoogle } = useContext(AuthContext);
+    const { signInWithGoogle } = useAuth();
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -19,10 +19,20 @@ const SocialLogin = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
-                navigate(from, {replace: true});
+                swal({
+                    title: "User Login Successful!",
+                    text: `Welcome - ${user?.displayName}`,
+                    icon: "success",
+                });
+                navigate(from, { replace: true });
             })
             .catch(error => {
-                toast.error(error.message);
+                swal({
+                    title: "Oops...",
+                    text: `${error.message}`,
+                    icon: "error",
+                    button: "Try again",
+                });
             })
     };
 
