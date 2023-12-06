@@ -1,12 +1,12 @@
 import React from 'react';
-import quote from '../../../assets/Icons/quote.svg';
+import quote from '../../assets/Icons/quote.svg';
 import StarRatings from 'react-star-ratings';
 
-const Testimonial = ({ testimonial }) => {
-    const { image, name, location, description, rating } = testimonial;
+const Review = ({ review }) => {
+    const { image, name, location, description, rating } = review;
 
     return (
-        <div className="card p-6 border mt-20 lg:mt-8 ">
+        <div className="card p-6 border">
             <div className='flex items-center justify-between'>
                 <div className='md:flex items-center'>
                     <div className="avatar">
@@ -39,4 +39,4 @@ const Testimonial = ({ testimonial }) => {
     );
 };
 
-export default Testimonial;
+export default Review;

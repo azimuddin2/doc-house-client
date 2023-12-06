@@ -10,7 +10,7 @@ const Appointment = () => {
 
     return (
         <div>
-            <PageCover subTitle={'Appointment'} title={'Appointment'}></PageCover>
+            <PageCover title={'Appointment'}></PageCover>
             <AppointmentCalendar date={date} setDate={setDate}></AppointmentCalendar>
             <AvailableAppointment date={date}></AvailableAppointment>
         </div>

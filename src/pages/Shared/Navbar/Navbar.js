@@ -40,7 +40,7 @@ const Navbar = () => {
         </li>
         <li>
             <CustomLink to='/reviews'>
-                <TbMessageStar className='text-lg lg:hidden' />  Reviews
+                <TbMessageStar className='text-lg lg:hidden' /> Reviews
             </CustomLink>
         </li>
         <li>
