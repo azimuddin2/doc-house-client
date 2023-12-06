@@ -1,28 +1,33 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../assets/Images/logo.png';
 import CustomLink from './CustomLink';
-import './Navbar.css';
-import { AuthContext } from '../../../providers/AuthProvider';
-import { toast } from 'react-toastify';
 import { LuLayoutDashboard } from "react-icons/lu";
 import { LuCalendarClock } from "react-icons/lu";
 import { IoHomeOutline } from "react-icons/io5";
 import { FiLogIn } from "react-icons/fi";
 import { TbMessageStar } from "react-icons/tb";
+import useAuth from '../../../hooks/useAuth';
+import './Navbar.css';
+import swal from 'sweetalert';
 
 const Navbar = () => {
-    const { user, logout } = useContext(AuthContext);
+    const { user, logout } = useAuth();
 
     const handleLogout = () => {
         logout()
             .then(() => { })
             .catch(error => {
-                toast.error(error.message);
+                swal({
+                    title: "Oops...",
+                    text: `${error.message}`,
+                    icon: "error",
+                    button: "Try again",
+                });
             })
     };
 
-    const menuItem = <>
+    const navOptions = <>
         <li>
             <CustomLink to='/'>
                 <IoHomeOutline className='text-lg lg:hidden' /> Home
@@ -38,7 +43,6 @@ const Navbar = () => {
                 <TbMessageStar className='text-lg lg:hidden' />  Reviews
             </CustomLink>
         </li>
-
         <li>
             <CustomLink to='/dashboard'>
                 <LuLayoutDashboard className='text-lg lg:hidden' /> Dashboard
@@ -67,21 +71,18 @@ const Navbar = () => {
     </>
 
     return (
-        <div className='bg-primary text-white lg:py-1'>
+        <div className='bg-primary text-white py-1 px-2 lg:px-0'>
             <div className="navbar container mx-auto max-w-screen-lg">
-
                 <div className="navbar-start">
                     <Link to="/">
                         <img className='w-full' style={{ height: "40px" }} src={logo} alt="Logo" />
                     </Link>
                 </div>
-
                 <div className="navbar-center hidden lg:flex items-center">
                     <ul className="flex items-center menu menu-horizontal p-0 text-white">
-                        {menuItem}
+                        {navOptions}
                     </ul>
                 </div>
-
                 <div className="navbar-end lg:hidden">
                     <div className="dropdown">
                         <label htmlFor='' tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -91,11 +92,10 @@ const Navbar = () => {
                             tabIndex="0"
                             className="menu menu-compact dropdown-content mt-3 p-5 shadow  w-60 right-6 responsive-navbar"
                         >
-                            {menuItem}
+                            {navOptions}
                         </ul>
                     </div>
                 </div>
-
             </div>
         </div>
     );

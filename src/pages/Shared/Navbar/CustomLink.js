@@ -6,7 +6,7 @@ const CustomLink = ({ children, to, ...props }) => {
     let match = useMatch({ path: resolved.pathname, end: true });
 
     return (
-        <Link className='lg:mr-1 mb-1 lg:mb-0'
+        <Link className='mb-1 lg:mb-0'
             style={{
                 background: match ? '#F7A582' : 'none',
                 fontWeight: match ? '600' : '500',

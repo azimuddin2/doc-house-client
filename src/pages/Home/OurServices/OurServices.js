@@ -6,6 +6,7 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import ServiceTab from './ServiceTab';
 import './OurServices.css';
+import ErrorElement from '../../Shared/ErrorElement/ErrorElement';
 
 const OurServices = () => {
     const [tabIndex, setTabIndex] = useState(0);
@@ -28,14 +29,14 @@ const OurServices = () => {
     }
 
     if (error) {
-        return <p className='my-10' style={{ color: '#f91944', textAlign: 'center' }}>error: {error.message}</p>
+        return <ErrorElement message={error.message}></ErrorElement>
     }
 
     return (
         <section className='max-w-screen-lg lg:mx-auto mx-5 my-12 lg:my-20 text-center lg:text-left'>
             <div className='grid grid-cols-1 lg:grid-cols-2 gap-6'>
                 <div>
-                    <img src={doctor} alt="Doctor" className='' />
+                    <img src={doctor} alt="Doctor" />
                 </div>
                 <div className='lg:mt-10'>
                     <div>
