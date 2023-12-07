@@ -28,7 +28,7 @@ const Review = ({ review }) => {
                 <div className="mt-3">
                     <StarRatings
                         rating={rating}
-                        starRatedColor="#F7A582"
+                        starRatedColor="#F2871D"
                         name="rating"
                         starSpacing="1px"
                         starDimension="22px"
