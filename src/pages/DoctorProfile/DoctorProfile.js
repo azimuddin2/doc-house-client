@@ -5,8 +5,10 @@ import { HiOutlineCurrencyDollar, HiOutlineLocationMarker } from 'react-icons/hi
 import { MdOutlineDateRange } from 'react-icons/md';
 import StarRatings from 'react-star-ratings';
 import Overview from './Overview';
+import useTitle from '../../hooks/useTitle';
 
 const DoctorProfile = () => {
+    useTitle('Doctor Profile');
     const doctorProfile = useLoaderData();
     const { image, name, job, location, date, price, rating } = doctorProfile;
 
@@ -14,12 +16,12 @@ const DoctorProfile = () => {
         <section>
             <PageCover title={'Doctor Profile'}></PageCover>
             <div className='max-w-screen-lg lg:mx-auto mx-5 my-10 lg:my-16'>
-                <div className="card lg:card-side py-0 bg-white shadow-md border p-6">
+                <div className="card lg:card-side bg-white shadow-md border p-6">
                     <figure>
                         <img src={image} alt={name} />
                     </figure>
-                    <div className="card-body">
-                        <h2 className="card-title text-3xl font-bold">Dr. {name}</h2>
+                    <div className=" py-5 px-0 lg:px-6">
+                        <h2 className="card-title text-2xl font-bold">Dr. {name}</h2>
                         <p className='text-accent text-base'>{job}</p>
                         <StarRatings
                             rating={rating}
@@ -28,21 +30,23 @@ const DoctorProfile = () => {
                             starSpacing="1px"
                             starDimension="20px"
                         />
-                        <p className='flex items-center'>
-                            <HiOutlineLocationMarker className='text-2xl text-accent mr-2' />
-                            <span className='text-accent text-base'>{location}</span>
-                        </p>
-                        <p className='flex items-center'>
-                            <MdOutlineDateRange className='text-2xl text-accent mr-2' />
-                            <span className='text-accent text-base'>{date}</span>
-                        </p>
-                        <p className='flex items-center'>
-                            <HiOutlineCurrencyDollar className='text-2xl text-accent mr-2' />
-                            <span className='text-accent text-base'>{price}</span>
-                        </p>
+                        <div className='mt-2'>
+                            <p className='flex items-center'>
+                                <HiOutlineLocationMarker className='text-xl text-accent mr-2' />
+                                <span className='text-accent text-base'>{location}</span>
+                            </p>
+                            <p className='flex items-center my-1'>
+                                <MdOutlineDateRange className='text-xl text-accent mr-2' />
+                                <span className='text-accent text-base'>{date}</span>
+                            </p>
+                            <p className='flex items-center'>
+                                <HiOutlineCurrencyDollar className='text-xl text-accent mr-2' />
+                                <span className='text-accent text-base'>{price}</span>
+                            </p>
+                        </div>
                     </div>
                 </div>
-                <div className='mt-10'>
+                <div className='mt-8'>
                     <Overview doctorProfile={doctorProfile}></Overview>
                 </div>
             </div>
