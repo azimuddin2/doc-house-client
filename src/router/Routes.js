@@ -1,3 +1,4 @@
+import Dashboard from "../layout/Dashboard";
 import Main from "../layout/Main";
 import Appointment from "../pages/Appointment/Appointment/Appointment";
 import DoctorProfile from "../pages/DoctorProfile/DoctorProfile";
@@ -44,6 +45,13 @@ const router = createBrowserRouter([
     {
         path: 'signup',
         element: <SignUp></SignUp>
+    },
+    {
+        path: 'dashboard',
+        element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+        children: [
+
+        ],
     },
 
 ]);
