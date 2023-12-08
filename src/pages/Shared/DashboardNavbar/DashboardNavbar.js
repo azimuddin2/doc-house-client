@@ -6,8 +6,8 @@ import logo from '../../../assets/Images/logo.png';
 import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { CgLogOut } from "react-icons/cg";
 import { BiSolidEdit } from 'react-icons/bi';
-import { FaRegCircleUser } from 'react-icons/fa6';
-import './DashboardNavbar.css'
+import { FaCircleUser, FaRegCircleUser } from 'react-icons/fa6';
+// import './DashboardNavbar.css'
 
 const DashboardNavbar = () => {
     const { user, logout } = useAuth();
@@ -28,7 +28,7 @@ const DashboardNavbar = () => {
     };
 
     return (
-        <div className="navbar bg-primary mx-auto max-w-screen-2xl lg:px-14">
+        <div className="navbar bg-primary mx-auto max-w-screen-2xl lg:px-6">
             <div className="navbar-start">
                 <div className="dropdown">
                     <label tabIndex="1" htmlFor="dashboard-sidebar" className="btn btn-ghost text-white lg:hidden">
@@ -46,24 +46,28 @@ const DashboardNavbar = () => {
                 </div>
                 <div className="dropdown dropdown-end">
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full ring ring-secondary ">
+                        <div>
                             {
                                 user.photoURL ?
-                                    <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
+                                    <div className="w-10 rounded-full border broder-secondary ">
+                                        <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
+                                    </div>
                                     :
-                                    <FaRegCircleUser />
+                                    <FaCircleUser className='text-white text-3xl' />
                             }
                         </div>
                     </label>
                     <ul tabIndex={0} className="responsive-box menu menu-sm dropdown-content mt-3 z-[1] py-8 px-6 shadow bg-base-100 rounded-box w-80">
                         <div className='text-center mb-4'>
                             <div className="avatar">
-                                <div className="w-20 rounded-full ring ring-primary ring-offset-1">
+                                <div>
                                     {
                                         user.photoURL ?
-                                            <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
+                                            <div className="w-20 rounded-full ring ring-primary ring-offset-1">
+                                                <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
+                                            </div>
                                             :
-                                            <FaRegCircleUser />
+                                            <FaCircleUser className='text-primary text-7xl' />
                                     }
                                 </div>
                             </div>

@@ -1,13 +1,12 @@
 import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import ActiveLink from '../components/ActiveLink/ActiveLink';
-import { FaHome, FaUsers } from 'react-icons/fa';
-import { FaUserDoctor } from 'react-icons/fa6';
-import { MdDashboard, MdDashboardCustomize, MdManageAccounts, MdRateReview } from 'react-icons/md';
-import { HiDocumentChartBar } from 'react-icons/hi2';
+import { FaUserDoctor, FaUsersGear } from 'react-icons/fa6';
+import { MdManageHistory, MdRateReview } from 'react-icons/md';
+import { HiDocumentChartBar, HiOutlineDocumentChartBar } from 'react-icons/hi2';
 import { TbMessageStar } from 'react-icons/tb';
-import { LuCalendarClock } from 'react-icons/lu';
-import { IoHomeOutline } from 'react-icons/io5';
+import { LuCalendarClock, LuLayoutDashboard } from 'react-icons/lu';
+import { AiOutlineHome } from "react-icons/ai";
 import DashboardNavbar from '../pages/Shared/DashboardNavbar/DashboardNavbar';
 import logo from '../assets/Images/dark-logo.png';
 
@@ -17,16 +16,16 @@ const Dashboard = () => {
     return (
         <div>
             <DashboardNavbar></DashboardNavbar>
-            <div className="drawer block lg:grid lg:drawer-open mx-auto max-w-screen-xl">
+            <div className="drawer block lg:grid lg:drawer-open mx-auto max-w-screen-2xl">
                 <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
                     <Outlet></Outlet>
                 </div>
                 <div className="drawer-side ">
                     <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 h-full w-72 lg:bg-inherit bg-base-100 text-base-content">
+                    <ul className="menu p-4 h-full w-64 lg:bg-inherit bg-base-100 text-base-content">
                         <Link to='/'>
-                            <img src={logo} alt="Logo" className='mx-6 mb-5 lg:hidden' style={{ height: '44px' }} />
+                            <img src={logo} alt="Logo" className='mx-6 mb-5 lg:hidden' style={{ height: '40px' }} />
                         </Link>
                         {
                             isAdmin ?
@@ -34,14 +33,14 @@ const Dashboard = () => {
 
                                     <li>
                                         <ActiveLink to='/dashboard'>
-                                            <MdDashboard className='text-xl' />
+                                            <LuLayoutDashboard className='text-xl' />
                                             <span>Dashboard</span>
                                         </ActiveLink>
                                     </li>
 
                                     <li>
                                         <ActiveLink to='/dashboard/all-users'>
-                                            <FaUsers className='text-xl' />
+                                            <FaUsersGear className='text-xl' />
                                             <span>All Users</span>
                                         </ActiveLink>
                                     </li>
@@ -55,15 +54,15 @@ const Dashboard = () => {
 
                                     <li>
                                         <ActiveLink to='/dashboard/manage-doctors'>
-                                            <MdManageAccounts className='text-2xl' />
+                                            <MdManageHistory className='text-xl' />
                                             <span>Manage Doctors</span>
                                         </ActiveLink>
                                     </li>
 
                                     <li>
                                         <ActiveLink to='/dashboard/manage-appointment'>
-                                            <HiDocumentChartBar className='text-xl' />
-                                            <span>Manage Appointments</span>
+                                            <HiOutlineDocumentChartBar className='text-2xl' />
+                                            <span>All Appointments</span>
                                         </ActiveLink>
                                     </li>
 
@@ -91,7 +90,7 @@ const Dashboard = () => {
 
                         <li>
                             <ActiveLink to='/'>
-                                <IoHomeOutline className='text-xl' />
+                                <AiOutlineHome className='text-xl' />
                                 <span>Home</span>
                             </ActiveLink>
                         </li>
