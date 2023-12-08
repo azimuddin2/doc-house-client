@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import ActiveLink from '../components/ActiveLink/ActiveLink';
 import { FaHome, FaUsers } from 'react-icons/fa';
 import { FaUserDoctor } from 'react-icons/fa6';
@@ -7,13 +7,16 @@ import { MdDashboard, MdDashboardCustomize, MdManageAccounts, MdRateReview } fro
 import { HiDocumentChartBar } from 'react-icons/hi2';
 import { TbMessageStar } from 'react-icons/tb';
 import { LuCalendarClock } from 'react-icons/lu';
+import { IoHomeOutline } from 'react-icons/io5';
+import DashboardNavbar from '../pages/Shared/DashboardNavbar/DashboardNavbar';
+import logo from '../assets/Images/dark-logo.png';
 
 const Dashboard = () => {
     const isAdmin = 'mohammadazimuddin274@gmail.com';  // TODO: server side data load
 
     return (
         <div>
-            {/* <DashboardNavbar></DashboardNavbar> */}
+            <DashboardNavbar></DashboardNavbar>
             <div className="drawer block lg:grid lg:drawer-open mx-auto max-w-screen-xl">
                 <input id="dashboard-sidebar" type="checkbox" className="drawer-toggle" />
                 <div className="drawer-content">
@@ -21,10 +24,10 @@ const Dashboard = () => {
                 </div>
                 <div className="drawer-side ">
                     <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
-                    <ul className="menu p-4 h-full w-64 lg:w-72 lg:bg-inherit bg-base-100 text-base-content">
-                        {/* <Link to='/'>
+                    <ul className="menu p-4 h-full w-72 lg:bg-inherit bg-base-100 text-base-content">
+                        <Link to='/'>
                             <img src={logo} alt="Logo" className='mx-6 mb-5 lg:hidden' style={{ height: '44px' }} />
-                        </Link> */}
+                        </Link>
                         {
                             isAdmin ?
                                 <>
@@ -64,20 +67,6 @@ const Dashboard = () => {
                                         </ActiveLink>
                                     </li>
 
-
-                                    <li>
-                                        <ActiveLink to='/dashboard/my-appointment'>
-                                            <HiDocumentChartBar className='text-xl' />
-                                            <span>My Appointment</span>
-                                        </ActiveLink>
-                                    </li>
-                                    <li>
-                                        <ActiveLink to='/dashboard/add-review'>
-                                            <MdRateReview className='text-xl' />
-                                            <span>Add Review</span>
-                                        </ActiveLink>
-                                    </li>
-
                                 </>
                                 :
                                 <>
@@ -102,7 +91,7 @@ const Dashboard = () => {
 
                         <li>
                             <ActiveLink to='/'>
-                                <FaHome className='text-xl' />
+                                <IoHomeOutline className='text-xl' />
                                 <span>Home</span>
                             </ActiveLink>
                         </li>
