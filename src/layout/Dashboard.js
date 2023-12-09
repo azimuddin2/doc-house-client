@@ -11,7 +11,7 @@ import DashboardNavbar from '../pages/Shared/DashboardNavbar/DashboardNavbar';
 import logo from '../assets/Images/dark-logo.png';
 
 const Dashboard = () => {
-    const isAdmin = 'mohammadazimuddin274@gmail.com';  // TODO: server side data load
+    const isAdmin = true;  // TODO: server side data load
 
     return (
         <div>

@@ -19,6 +19,7 @@ const SocialLogin = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                saveUserDatabase(user.displayName, user.email);
                 swal({
                     title: "User Login Successful!",
                     text: `Welcome - ${user?.displayName}`,
@@ -33,6 +34,26 @@ const SocialLogin = () => {
                     icon: "error",
                     button: "Try again",
                 });
+            })
+    };
+
+    const saveUserDatabase = (name, email) => {
+        const user = {
+            name,
+            email
+        };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.insertedId) {
+
+                }
             })
     };
 

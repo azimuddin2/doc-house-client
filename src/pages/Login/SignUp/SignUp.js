@@ -13,7 +13,7 @@ import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth';
 
 const SignUp = () => {
-    useTitle('SignUp')
+    useTitle('SignUp');
     const { createUser, updateUserProfile } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
 
@@ -33,6 +33,7 @@ const SignUp = () => {
                 const user = result.user;
                 console.log(user);
                 handleUpdateUserProfile(name);
+                saveUserDatabase(name, email);
                 form.reset();
                 swal({
                     title: "User SignUp Successful!",
@@ -64,6 +65,26 @@ const SignUp = () => {
                     icon: "error",
                     button: "Try again",
                 });
+            })
+    };
+
+    const saveUserDatabase = (name, email) => {
+        const user = {
+            name,
+            email
+        };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(result => {
+                if (result.insertedId) {
+
+                }
             })
     };
 
