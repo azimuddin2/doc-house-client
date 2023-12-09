@@ -7,7 +7,7 @@ import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { CgLogOut } from "react-icons/cg";
 import { BiSolidEdit } from 'react-icons/bi';
 import { FaCircleUser, FaRegCircleUser } from 'react-icons/fa6';
-// import './DashboardNavbar.css'
+import './DashboardNavbar.css'
 
 const DashboardNavbar = () => {
     const { user, logout } = useAuth();

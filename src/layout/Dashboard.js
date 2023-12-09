@@ -60,7 +60,7 @@ const Dashboard = () => {
                                     </li>
 
                                     <li>
-                                        <ActiveLink to='/dashboard/manage-appointment'>
+                                        <ActiveLink to='/dashboard/all-appointments'>
                                             <HiOutlineDocumentChartBar className='text-2xl' />
                                             <span>All Appointments</span>
                                         </ActiveLink>
