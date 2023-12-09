@@ -6,6 +6,8 @@ import AdminHome from "../pages/Dashboard/AdminPages/AdminHome/AdminHome";
 import AllAppointments from "../pages/Dashboard/AdminPages/AllAppointments/AllAppointments";
 import AllUsers from "../pages/Dashboard/AdminPages/AllUsers/AllUsers";
 import ManageDoctors from "../pages/Dashboard/AdminPages/ManageDoctors/ManageDoctors";
+import AddReview from "../pages/Dashboard/UserPages/AddReview/AddReview";
+import MyAppointment from "../pages/Dashboard/UserPages/MyAppointment/MyAppointment";
 import DoctorProfile from "../pages/DoctorProfile/DoctorProfile";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
@@ -55,6 +57,16 @@ const router = createBrowserRouter([
         path: 'dashboard',
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
+            {
+                path: '/dashboard',
+                element: <MyAppointment></MyAppointment>
+            },
+            {
+                path: 'add-review',
+                element: <AddReview></AddReview>
+            },
+
+            // TODO: admin routes
             {
                 path: '/dashboard',
                 element: <AdminHome></AdminHome>

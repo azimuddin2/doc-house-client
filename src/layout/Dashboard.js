@@ -2,8 +2,8 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import ActiveLink from '../components/ActiveLink/ActiveLink';
 import { FaUserDoctor, FaUsersGear } from 'react-icons/fa6';
-import { MdManageHistory, MdRateReview } from 'react-icons/md';
-import { HiDocumentChartBar, HiOutlineDocumentChartBar } from 'react-icons/hi2';
+import { MdManageHistory, MdOutlineRateReview } from 'react-icons/md';
+import { HiOutlineDocumentChartBar } from 'react-icons/hi2';
 import { TbMessageStar } from 'react-icons/tb';
 import { LuCalendarClock, LuLayoutDashboard } from 'react-icons/lu';
 import { AiOutlineHome } from "react-icons/ai";
@@ -30,87 +30,72 @@ const Dashboard = () => {
                         {
                             isAdmin ?
                                 <>
-
                                     <li>
                                         <ActiveLink to='/dashboard'>
                                             <LuLayoutDashboard className='text-xl' />
                                             <span>Dashboard</span>
                                         </ActiveLink>
                                     </li>
-
                                     <li>
                                         <ActiveLink to='/dashboard/all-users'>
                                             <FaUsersGear className='text-xl' />
                                             <span>All Users</span>
                                         </ActiveLink>
                                     </li>
-
                                     <li>
                                         <ActiveLink to='/dashboard/add-doctor'>
                                             <FaUserDoctor className='text-xl' />
                                             <span>Add a Doctor</span>
                                         </ActiveLink>
                                     </li>
-
                                     <li>
                                         <ActiveLink to='/dashboard/manage-doctors'>
                                             <MdManageHistory className='text-xl' />
                                             <span>Manage Doctors</span>
                                         </ActiveLink>
                                     </li>
-
                                     <li>
                                         <ActiveLink to='/dashboard/all-appointments'>
                                             <HiOutlineDocumentChartBar className='text-2xl' />
                                             <span>All Appointments</span>
                                         </ActiveLink>
                                     </li>
-
                                 </>
                                 :
                                 <>
                                     <li>
-                                        <ActiveLink to='/dashboard/my-appointment'>
-                                            <HiDocumentChartBar className='text-xl' />
+                                        <ActiveLink to='/dashboard'>
+                                            <HiOutlineDocumentChartBar className='text-xl' />
                                             <span>My Appointment</span>
                                         </ActiveLink>
                                     </li>
                                     <li>
                                         <ActiveLink to='/dashboard/add-review'>
-                                            <MdRateReview className='text-xl' />
+                                            <MdOutlineRateReview className='text-xl' />
                                             <span>Add Review</span>
                                         </ActiveLink>
                                     </li>
                                 </>
                         }
-
-
-
                         <div className="divider divide-white"></div>
-
                         <li>
                             <ActiveLink to='/'>
                                 <AiOutlineHome className='text-xl' />
                                 <span>Home</span>
                             </ActiveLink>
                         </li>
-
                         <li>
                             <ActiveLink to='/appointment'>
                                 <LuCalendarClock className='text-xl' />
                                 <span>Appointment</span>
                             </ActiveLink>
                         </li>
-
                         <li>
                             <ActiveLink to='/reviews'>
                                 <TbMessageStar className='text-xl' />
                                 <span>Reviews</span>
                             </ActiveLink>
                         </li>
-
-
-
                     </ul>
                 </div>
             </div>

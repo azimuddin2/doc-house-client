@@ -43,11 +43,15 @@ const Navbar = () => {
                 <TbMessageStar className='text-lg lg:hidden' /> Reviews
             </CustomLink>
         </li>
-        <li>
-            <CustomLink to='/dashboard'>
-                <LuLayoutDashboard className='text-lg lg:hidden' /> Dashboard
-            </CustomLink>
-        </li>
+        {
+            user?.uid && (
+                <li>
+                    <CustomLink to='/dashboard'>
+                        <LuLayoutDashboard className='text-lg lg:hidden' /> Dashboard
+                    </CustomLink>
+                </li>
+            )
+        }
         <li>
             {
                 user?.uid ?
