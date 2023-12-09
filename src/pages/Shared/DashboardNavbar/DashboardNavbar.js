@@ -6,8 +6,7 @@ import logo from '../../../assets/Images/logo.png';
 import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { CgLogOut } from "react-icons/cg";
 import { BiSolidEdit } from 'react-icons/bi';
-import { FaCircleUser, FaRegCircleUser } from 'react-icons/fa6';
-import './DashboardNavbar.css'
+import { FaCircleUser } from 'react-icons/fa6';
 
 const DashboardNavbar = () => {
     const { user, logout } = useAuth();
@@ -49,7 +48,7 @@ const DashboardNavbar = () => {
                         <div>
                             {
                                 user.photoURL ?
-                                    <div className="w-10 rounded-full border broder-secondary ">
+                                    <div style={{ border: '2px solid #F7A582' }} className="w-10 rounded-full">
                                         <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
                                     </div>
                                     :
@@ -57,13 +56,13 @@ const DashboardNavbar = () => {
                             }
                         </div>
                     </label>
-                    <ul tabIndex={0} className="responsive-box menu menu-sm dropdown-content mt-3 z-[1] py-8 px-6 shadow bg-base-100 rounded-box w-80">
+                    <ul tabIndex={0} className="responsive-box menu menu-sm dropdown-content mt-4 z-[1] py-8 px-6 shadow bg-base-100 rounded-box w-80">
                         <div className='text-center mb-4'>
                             <div className="avatar">
                                 <div>
                                     {
                                         user.photoURL ?
-                                            <div className="w-20 rounded-full ring ring-primary ring-offset-1">
+                                            <div style={{ border: '2px solid #07332F' }} className="w-20 rounded-full">
                                                 <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
                                             </div>
                                             :
@@ -71,17 +70,17 @@ const DashboardNavbar = () => {
                                     }
                                 </div>
                             </div>
-                            <h1 className='text-lg font-family font-medium mt-2'>Hi, {user.displayName}!</h1>
+                            <h1 className='text-lg font-family font-medium mt-1'>Hi, {user.displayName}!</h1>
                             <h1 className='text-md mb-3'>{user.email}</h1>
                         </div>
                         <li>
-                            <Link to={'/dashboard/edit-profile'} className="justify-between text-lg">
+                            <Link to={'/dashboard/edit-profile'} className="justify-between text-lg hover:bg-[#F1F5F9]">
                                 Edit Profile
                                 <span className="badge"><BiSolidEdit className='text-lg' /></span>
                             </Link>
                         </li>
                         <li>
-                            <button onClick={handleLogout} className='text-lg'>
+                            <button onClick={handleLogout} className='text-lg hover:bg-[#F1F5F9]'>
                                 Logout
                                 <span className="badge"><CgLogOut className='text-lg' /></span>
                             </button>
