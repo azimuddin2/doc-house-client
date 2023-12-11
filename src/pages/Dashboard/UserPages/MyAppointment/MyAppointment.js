@@ -4,16 +4,18 @@ import useAuth from '../../../../hooks/useAuth';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import Booking from './Booking';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const MyAppointment = () => {
-    const { user } = useAuth();
+    const { user, loading } = useAuth();
+    const [axiosSecure] = useAxiosSecure();
 
-    const { data: bookings, error, isLoading } = useQuery({
+    const { data: bookings = [], error, isLoading } = useQuery({
         queryKey: ['booking', user?.email],
+        enabled: !loading,
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`);
-            const data = await res.json();
-            return data;
+            const res = await axiosSecure.get(`/booking?email=${user?.email}`);
+            return res.data;
         }
     })
 
