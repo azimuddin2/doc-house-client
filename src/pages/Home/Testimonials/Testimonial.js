@@ -31,7 +31,7 @@ const Testimonial = ({ testimonial }) => {
                         starRatedColor="#F2871D"
                         name="rating"
                         starSpacing="1px"
-                        starDimension="22px"
+                        starDimension="20px"
                     />
                 </div>
             </div>
