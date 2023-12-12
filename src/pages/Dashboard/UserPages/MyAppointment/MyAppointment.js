@@ -29,7 +29,7 @@ const MyAppointment = () => {
 
     return (
         <div className='bg-[#F1F5F9] h-full py-16'>
-            <div className='w-11/12 lg:w-4/5 mx-auto bg-white p-5 lg:p-10'>
+            <div className='w-11/12 lg:w-5/6 mx-auto bg-white p-5 lg:p-10'>
                 <div className='mb-4'>
                     <h2 className='text-xl font-bold text-primary'>My Appointment: {bookings?.length}</h2>
                 </div>

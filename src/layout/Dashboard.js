@@ -9,9 +9,12 @@ import { LuCalendarClock, LuLayoutDashboard } from 'react-icons/lu';
 import { AiOutlineHome } from "react-icons/ai";
 import DashboardNavbar from '../pages/Shared/DashboardNavbar/DashboardNavbar';
 import logo from '../assets/Images/dark-logo.png';
+import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
-    const isAdmin = false;  // TODO: server side data load
+    // const isAdmin = false;  // TODO: server side data load
+
+    const [isAdmin] = useAdmin();
 
     return (
         <div>
@@ -64,7 +67,7 @@ const Dashboard = () => {
                                 :
                                 <>
                                     <li>
-                                        <ActiveLink to='/dashboard'>
+                                        <ActiveLink to='/dashboard/my-appointment'>
                                             <HiOutlineDocumentChartBar className='text-xl' />
                                             <span>My Appointment</span>
                                         </ActiveLink>

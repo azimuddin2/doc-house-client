@@ -13,6 +13,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
 import SignUp from "../pages/Login/SignUp/SignUp";
 import Reviews from "../pages/Reviews/Reviews";
+import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
 const { createBrowserRouter } = require("react-router-dom");
@@ -58,7 +59,7 @@ const router = createBrowserRouter([
         element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
         children: [
             {
-                path: '/dashboard',
+                path: 'my-appointment',
                 element: <MyAppointment></MyAppointment>
             },
             {
@@ -69,23 +70,23 @@ const router = createBrowserRouter([
             // TODO: admin routes
             {
                 path: '/dashboard',
-                element: <AdminHome></AdminHome>
+                element: <AdminRoute><AdminHome></AdminHome></AdminRoute>
             },
             {
                 path: 'all-users',
-                element: <AllUsers></AllUsers>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
             },
             {
                 path: 'add-doctor',
-                element: <AddDoctor></AddDoctor>
+                element: <AdminRoute><AddDoctor></AddDoctor></AdminRoute>
             },
             {
                 path: 'manage-doctors',
-                element: <ManageDoctors></ManageDoctors>
+                element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
             },
             {
                 path: 'all-appointments',
-                element: <AllAppointments></AllAppointments>
+                element: <AdminRoute><AllAppointments></AllAppointments></AdminRoute>
             }
         ],
     },

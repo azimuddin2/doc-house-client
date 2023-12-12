@@ -10,9 +10,11 @@ import { TbMessageStar } from "react-icons/tb";
 import useAuth from '../../../hooks/useAuth';
 import './Navbar.css';
 import swal from 'sweetalert';
+import useAdmin from '../../../hooks/useAdmin';
 
 const Navbar = () => {
     const { user, logout } = useAuth();
+    const [isAdmin] = useAdmin();
 
     const handleLogout = () => {
         logout()
@@ -46,9 +48,16 @@ const Navbar = () => {
         {
             user?.uid && (
                 <li>
-                    <CustomLink to='/dashboard'>
-                        <LuLayoutDashboard className='text-lg lg:hidden' /> Dashboard
-                    </CustomLink>
+                    {
+                        isAdmin ?
+                            <CustomLink to='/dashboard'>
+                                <LuLayoutDashboard className='text-lg lg:hidden' /> Dashboard
+                            </CustomLink>
+                            :
+                            <CustomLink to='/dashboard/my-appointment'>
+                                <LuLayoutDashboard className='text-lg lg:hidden' /> Dashboard
+                            </CustomLink>
+                    }
                 </li>
             )
         }

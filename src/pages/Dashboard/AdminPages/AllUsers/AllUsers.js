@@ -3,17 +3,18 @@ import React from 'react';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import UserRow from './UserRow';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const AllUsers = () => {
+    const [axiosSecure] = useAxiosSecure();
 
     const { data: users, isLoading, error, refetch } = useQuery({
         queryKey: ['users'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/users');
-            const data = await res.json();
-            return data;
+            const res = await axiosSecure.get('/users');
+            return res.data;
         }
-    });
+    })
 
     if (error) {
         return <ErrorElement message={error.message}></ErrorElement>
