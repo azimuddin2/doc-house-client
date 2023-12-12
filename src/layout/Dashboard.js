@@ -12,8 +12,6 @@ import logo from '../assets/Images/dark-logo.png';
 import useAdmin from '../hooks/useAdmin';
 
 const Dashboard = () => {
-    // const isAdmin = false;  // TODO: server side data load
-
     const [isAdmin] = useAdmin();
 
     return (

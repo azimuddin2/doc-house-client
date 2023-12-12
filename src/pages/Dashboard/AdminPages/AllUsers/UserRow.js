@@ -2,8 +2,10 @@ import React from 'react';
 import { RiAdminLine, RiDeleteBin5Line } from 'react-icons/ri';
 import { FaCircleUser } from "react-icons/fa6";
 import swal from 'sweetalert';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const UserRow = ({ index, user, refetch }) => {
+    const [axiosSecure] = useAxiosSecure();
     const { image, name, email, role } = user;
 
     const handleMakeAdmin = (user) => {
@@ -22,6 +24,32 @@ const UserRow = ({ index, user, refetch }) => {
                     })
                 }
             })
+    };
+
+    const handleDelete = (user) => {
+        swal({
+            title: "Are you sure?",
+            text: `User account - ${user.email}`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axiosSecure.delete(`/users/${user._id}`)
+                        .then(result => {
+                            console.log(result);
+                            if (result.data.deletedCount > 0) {
+                                refetch();
+                                swal({
+                                    text: `${user.email} has been deleted!`,
+                                    icon: "success",
+                                    timer: 6000,
+                                });
+                            }
+                        })
+                }
+            });
     };
 
     return (
@@ -65,7 +93,7 @@ const UserRow = ({ index, user, refetch }) => {
             <td>
                 <span className='tooltip' data-tip="Delete">
                     <RiDeleteBin5Line
-                        // onClick={() => handleDelete(user)}
+                        onClick={() => handleDelete(user)}
                         className='text-2xl text-secondary cursor-pointer'
                     />
                 </span>
