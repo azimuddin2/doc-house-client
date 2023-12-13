@@ -1,21 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
+import useAuth from '../../../../hooks/useAuth';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import useTitle from '../../../../hooks/useTitle';
+import { useForm } from 'react-hook-form';
+import swal from 'sweetalert';
+import { IoRocketSharp } from 'react-icons/io5';
+import { MdOutlineErrorOutline } from 'react-icons/md';
+import StarRatings from 'react-star-ratings';
 
 const AddReview = () => {
+    useTitle('Add Review');
+    const { user } = useAuth();
+    const [axiosSecure] = useAxiosSecure();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+
+    const [rating, setRating] = useState(0);
+
+    const changeRating = (newRating, name) => {
+        setRating(newRating);
+    };
+
+    const onSubmit = (data) => {
+        const { name, details } = data;
+
+        const reviewInfo = {
+            rating,
+            name,
+            email: user?.email,
+            details
+        };
+        axiosSecure.post('/reviews', reviewInfo)
+            .then(result => {
+                if (result.data.insertedId) {
+                    reset();
+                    swal({
+                        title: "Review successfully",
+                        icon: "success",
+                        timer: 5000,
+                    });
+                }
+            })
+    };
+
     return (
-        <div className='my-10'>
-            <SectionTitle subHeading={'Sharing is Caring!'} heading={'Give a Review'}></SectionTitle>
-            <div className='px-5 py-8 lg:p-12 w-11/12 lg:w-3/5 mx-auto bg-[#F3F3F3]'>
+        <div className='my-20'>
+            <div className='px-5 py-8 lg:p-12 w-11/12 lg:w-3/5 mx-auto bg-[#F1F5F9]'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='text-center mb-6'>
                         <h2 className='text-xl uppercase font-medium mb-2 font-family'>Rate Us!</h2>
                         <StarRatings
                             rating={rating}
-                            starRatedColor="#D99904"
+                            starRatedColor="#F2871D"
                             name="rating"
                             starSpacing="2px"
                             changeRating={changeRating}
                             starDimension="34px"
-                            starHoverColor="#D99904"
+                            starHoverColor="#F2871D"
                         />
                     </div>
                     <div className='grid grid-cols-1 mb-5'>
@@ -74,7 +114,7 @@ const AddReview = () => {
                             </label>
                         </div>
                     </div>
-                    <Button>Send Review <IoRocketSharp className='text-xl animate-bounce' /></Button>
+                    {/* <Button>Send Review <IoRocketSharp className='text-xl animate-bounce' /></Button> */}
                 </form>
             </div>
         </div>
