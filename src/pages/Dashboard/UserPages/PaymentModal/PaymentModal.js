@@ -18,12 +18,11 @@ const PaymentModal = ({ payment, setPayment, refetch }) => {
                     <h3 className="font-bold text-xl mt-2 text-accent">Please Pay for <span className=' text-primary'>{treatment}</span></h3>
                     <p className='text-lg text-accent my-2'>Your Appointment: <span style={{ color: '#F0AA22' }}>{date}</span> at {slot}</p>
                     <h2 className='text-xl font-bold text-accent'>Please Pay: <span className='text-primary'>${price}</span></h2>
-                    {/* <div className="divider"></div> */}
                     <div className='mt-10'>
                         <Elements stripe={stripePromise}>
                             <CheckoutForm
                                 refetch={refetch}
-                                payment={payment}
+                                price={price}
                                 setPayment={setPayment}
                             />
                         </Elements>
