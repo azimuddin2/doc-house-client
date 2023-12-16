@@ -1,16 +1,18 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import Booking from './Booking';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import PaymentModal from '../PaymentModal/PaymentModal';
 
 const MyAppointment = () => {
     const { user, loading } = useAuth();
     const [axiosSecure] = useAxiosSecure();
+    const [payment, setPayment] = useState(null);
 
-    const { data: bookings = [], error, isLoading } = useQuery({
+    const { data: bookings = [], error, isLoading, refetch } = useQuery({
         queryKey: ['booking', user?.email],
         enabled: !loading,
         queryFn: async () => {
@@ -52,12 +54,20 @@ const MyAppointment = () => {
                                     key={booking._id}
                                     index={index}
                                     booking={booking}
+                                    setPayment={setPayment}
                                 ></Booking>)
                             }
                         </tbody>
                     </table>
                 </div>
             </div>
+            {
+                payment && <PaymentModal
+                    payment={payment}
+                    setPayment={setPayment}
+                    refetch={refetch}
+                ></PaymentModal>
+            }
         </div>
     );
 };

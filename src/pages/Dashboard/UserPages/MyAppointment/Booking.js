@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Booking = ({ index, booking }) => {
+const Booking = ({ index, booking, setPayment }) => {
     const { patientName, treatment, date, slot, price } = booking;
 
     return (
@@ -14,7 +14,13 @@ const Booking = ({ index, booking }) => {
             <td>{slot}</td>
             <td className='text-secondary font-bold'>${price}</td>
             <td>
-                <button className='btn btn-sm btn-primary text-white rounded'>Pay</button>
+                <label
+                    onClick={() => setPayment(booking)}
+                    htmlFor="payment-modal"
+                    className='btn btn-sm btn-primary text-white rounded'
+                >
+                    Pay
+                </label>
             </td>
         </tr>
     );
