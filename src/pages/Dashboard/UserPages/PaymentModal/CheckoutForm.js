@@ -4,14 +4,16 @@ import useAuth from '../../../../hooks/useAuth';
 import './CheckoutForm.css';
 import { toast } from 'react-toastify';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import swal from 'sweetalert';
 
-const CheckoutForm = ({ refetch, price, setPayment }) => {
+const CheckoutForm = ({ refetch, payment, setPayment }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
+    const { _id, patientName, treatment, price } = payment;
 
     useEffect(() => {
         axiosSecure.post('/create-payment-intent', { price })
@@ -65,7 +67,36 @@ const CheckoutForm = ({ refetch, price, setPayment }) => {
             console.log(confirmError);
         }
 
+        setProcessing(false);
 
+        if (paymentIntent.status === 'succeeded') {
+            const transactionId = paymentIntent.id;
+            const date = new Date();
+
+            // TODO: payment information to the server save
+            const paymentInfo = {
+                patientName,
+                email: user?.email,
+                transactionId,
+                date,
+                price,
+                treatment,
+                treatmentId: _id,
+            };
+            axiosSecure.post('/payments', paymentInfo)
+                .then(result => {
+                    if (result.data.insertedId) {
+                        refetch();
+                        toast.success(`Congrats! Your payment completed. Your Transaction: ${transactionId}`);
+                        swal({
+                            title: "Congratulation!",
+                            text: `Transaction Id: ${transactionId}`,
+                            icon: "success",
+                        });
+                        setPayment(null);
+                    }
+                })
+        }
     };
 
     return (

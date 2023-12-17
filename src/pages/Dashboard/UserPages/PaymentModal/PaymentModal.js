@@ -22,7 +22,7 @@ const PaymentModal = ({ payment, setPayment, refetch }) => {
                         <Elements stripe={stripePromise}>
                             <CheckoutForm
                                 refetch={refetch}
-                                price={price}
+                                payment={payment}
                                 setPayment={setPayment}
                             />
                         </Elements>
