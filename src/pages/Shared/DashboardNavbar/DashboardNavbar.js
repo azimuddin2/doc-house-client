@@ -56,7 +56,7 @@ const DashboardNavbar = () => {
                             }
                         </div>
                     </label>
-                    <ul tabIndex={0} className="responsive-box menu menu-sm dropdown-content mt-4 z-[1] py-8 px-6 shadow bg-base-100 rounded-box w-80">
+                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-4 z-[1] py-8 px-6 shadow bg-primary text-white rounded-box w-80">
                         <div className='text-center mb-4'>
                             <div className="avatar">
                                 <div>
@@ -66,7 +66,7 @@ const DashboardNavbar = () => {
                                                 <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
                                             </div>
                                             :
-                                            <FaCircleUser className='text-primary text-7xl' />
+                                            <FaCircleUser className='text-white text-7xl' />
                                     }
                                 </div>
                             </div>
