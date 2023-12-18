@@ -2,12 +2,13 @@ import { format } from 'date-fns';
 import React from 'react';
 import { toast } from 'react-toastify';
 import useAuth from '../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
-
     const { user } = useAuth();
     const { _id, name, price, slots } = treatment;
     const formatDate = format(date, 'PP');
+    const navigate = useNavigate();
 
     const handleBooking = (event) => {
         event.preventDefault();
@@ -43,6 +44,7 @@ const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
                 refetch();
                 // to close the modal
                 setTreatment(null);
+                navigate('/dashboard/my-appointment');
             })
     };
 

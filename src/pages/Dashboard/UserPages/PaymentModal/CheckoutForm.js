@@ -64,10 +64,9 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
 
         if (confirmError) {
             toast.error(confirmError.message);
-            console.log(confirmError);
+            setProcessing(false);
+            return;
         }
-
-        setProcessing(false);
 
         if (paymentIntent.status === 'succeeded') {
             const transactionId = paymentIntent.id;
@@ -82,12 +81,13 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
                 price,
                 treatment,
                 treatmentId: _id,
+                status: 'pending',
             };
-            axiosSecure.post('/payments', paymentInfo)
+            axiosSecure.patch(`/booking/${_id}`, paymentInfo)
                 .then(result => {
+                    console.log(result)
                     if (result.data.insertedId) {
                         refetch();
-                        toast.success(`Congrats! Your payment completed. Your Transaction: ${transactionId}`);
                         swal({
                             title: "Congratulation!",
                             text: `Transaction Id: ${transactionId}`,
@@ -97,6 +97,7 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
                     }
                 })
         }
+        setProcessing(false);
     };
 
     return (
