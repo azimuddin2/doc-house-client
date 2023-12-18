@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import ActiveLink from '../components/ActiveLink/ActiveLink';
 import { FaUserDoctor, FaUsersGear } from 'react-icons/fa6';
-import { MdManageHistory, MdOutlineRateReview } from 'react-icons/md';
+import { MdHistory, MdManageHistory, MdOutlineRateReview } from 'react-icons/md';
 import { HiOutlineDocumentChartBar } from 'react-icons/hi2';
 import { TbMessageStar } from 'react-icons/tb';
 import { LuCalendarClock, LuLayoutDashboard } from 'react-icons/lu';
@@ -74,6 +74,12 @@ const Dashboard = () => {
                                         <ActiveLink to='/dashboard/add-review'>
                                             <MdOutlineRateReview className='text-xl' />
                                             <span>Add Review</span>
+                                        </ActiveLink>
+                                    </li>
+                                    <li>
+                                        <ActiveLink to='/dashboard/payment-history'>
+                                            <MdHistory className='text-xl'/>
+                                            <span>Payment History</span>
                                         </ActiveLink>
                                     </li>
                                 </>

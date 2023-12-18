@@ -8,6 +8,7 @@ import AllUsers from "../pages/Dashboard/AdminPages/AllUsers/AllUsers";
 import ManageDoctors from "../pages/Dashboard/AdminPages/ManageDoctors/ManageDoctors";
 import AddReview from "../pages/Dashboard/UserPages/AddReview/AddReview";
 import MyAppointment from "../pages/Dashboard/UserPages/MyAppointment/MyAppointment";
+import PaymentHistory from "../pages/Dashboard/UserPages/PaymentHistory/PaymentHistory";
 import DoctorProfile from "../pages/DoctorProfile/DoctorProfile";
 import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
             {
                 path: 'add-review',
                 element: <AddReview></AddReview>
+            },
+            {
+                path: 'payment-history',
+                element: <PaymentHistory></PaymentHistory>
             },
 
             // TODO: admin routes

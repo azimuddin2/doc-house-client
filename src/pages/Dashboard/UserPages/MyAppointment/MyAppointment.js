@@ -6,8 +6,10 @@ import Loading from '../../../Shared/Loading/Loading';
 import Booking from './Booking';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import PaymentModal from '../PaymentModal/PaymentModal';
+import useTitle from '../../../../hooks/useTitle';
 
 const MyAppointment = () => {
+    useTitle('My Appointment');
     const { user, loading } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const [payment, setPayment] = useState(null);
