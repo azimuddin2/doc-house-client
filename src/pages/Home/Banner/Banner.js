@@ -9,7 +9,6 @@ import doctor1 from '../../../assets/Images/doctor1.png';
 import doctor2 from '../../../assets/Images/doctor2.png';
 import doctor3 from '../../../assets/Images/doctor3.png';
 import { FaArrowRight } from "react-icons/fa6";
-import Button from '../../../components/Button/Button';
 
 const Banner = () => {
     return (
@@ -30,7 +29,9 @@ const Banner = () => {
                         <h1 className="text-3xl md:text-5xl lg:text-5xl font-medium text-white">Your Best Medical <br /> Help Center</h1>
                         <p style={{ color: '#F3F3F3' }} className="py-4 lg:py-8 text-sm "> The online website helps you to keep track of your health care provider visits, test results, billing, prescriptions, and so on. You can also e-mail your provider questions through the doc house.</p>
                         <Link to='/appointment'>
-                            <Button>All Service <FaArrowRight className='text-lg' /></Button>
+                            <button className='btn btn-secondary text-white capitalize'>
+                                All Service <FaArrowRight className='text-lg' />
+                            </button>
                         </Link>
                     </div>
                 </div>

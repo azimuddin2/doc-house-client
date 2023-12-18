@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 import { IoRocketSharp } from 'react-icons/io5';
 import { MdOutlineErrorOutline } from 'react-icons/md';
 import StarRatings from 'react-star-ratings';
+import Button from '../../../../components/Button/Button';
 
 const AddReview = () => {
     useTitle('Add Review');
@@ -114,7 +115,7 @@ const AddReview = () => {
                             </label>
                         </div>
                     </div>
-                    {/* <Button>Send Review <IoRocketSharp className='text-xl animate-bounce' /></Button> */}
+                    <Button>Send Review <IoRocketSharp className='text-xl' /></Button>
                 </form>
             </div>
         </div>
