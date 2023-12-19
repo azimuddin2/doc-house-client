@@ -74,13 +74,13 @@ const DashboardNavbar = () => {
                             <h1 className='text-md mb-3'>{user.email}</h1>
                         </div>
                         <li>
-                            <Link to={'/dashboard/edit-profile'} className="justify-between text-lg hover:bg-[#F1F5F9]">
+                            <Link to={'/dashboard/edit-profile'} className="justify-between text-lg hover:bg-[#F1F5F9] hover:text-primary font-medium">
                                 Edit Profile
                                 <span className="badge"><BiSolidEdit className='text-lg' /></span>
                             </Link>
                         </li>
                         <li>
-                            <button onClick={handleLogout} className='text-lg hover:bg-[#F1F5F9]'>
+                            <button onClick={handleLogout} className='text-lg hover:bg-[#F1F5F9] hover:text-primary font-medium'>
                                 Logout
                                 <span className="badge"><CgLogOut className='text-lg' /></span>
                             </button>
