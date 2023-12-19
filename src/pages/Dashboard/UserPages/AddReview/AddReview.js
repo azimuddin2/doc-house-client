@@ -8,6 +8,7 @@ import { IoRocketSharp } from 'react-icons/io5';
 import { MdOutlineErrorOutline } from 'react-icons/md';
 import StarRatings from 'react-star-ratings';
 import Button from '../../../../components/Button/Button';
+import Title from '../../../../components/Title/Title';
 
 const AddReview = () => {
     useTitle('Add Review');
@@ -44,11 +45,12 @@ const AddReview = () => {
     };
 
     return (
-        <div className='my-20'>
+        <div className='my-12'>
+            <Title heading={'Sharing is Caring'} title={'Give a Review'}></Title>
             <div className='px-5 py-8 lg:p-12 w-11/12 lg:w-3/5 mx-auto bg-[#F1F5F9]'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='text-center mb-6'>
-                        <h2 className='text-xl uppercase font-medium mb-2 font-family'>Rate Us!</h2>
+                        <h2 className='text-xl uppercase font-medium mb-2'>Rate Us!</h2>
                         <StarRatings
                             rating={rating}
                             starRatedColor="#F2871D"

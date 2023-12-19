@@ -10,8 +10,11 @@ const Booking = ({ index, booking, setPayment }) => {
                 {patientName}
             </td>
             <td>{treatment}</td>
-            <td>{date}</td>
-            <td>{slot}</td>
+            <td>
+                {date}
+                <br />
+                <span className="badge badge-ghost badge-sm">{slot}</span>
+            </td>
             <td className='text-secondary font-bold'>${price}</td>
             <td>
                 {

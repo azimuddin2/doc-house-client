@@ -62,7 +62,7 @@ const DashboardNavbar = () => {
                                 <div>
                                     {
                                         user.photoURL ?
-                                            <div style={{ border: '2px solid #07332F' }} className="w-20 rounded-full">
+                                            <div style={{ border: '2px solid #F7A582' }} className="w-20 rounded-full">
                                                 <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
                                             </div>
                                             :
@@ -70,7 +70,7 @@ const DashboardNavbar = () => {
                                     }
                                 </div>
                             </div>
-                            <h1 className='text-lg font-family font-medium mt-1'>Hi, {user.displayName}!</h1>
+                            <h1 className='text-lg font-medium mt-1'>Hi, {user.displayName}!</h1>
                             <h1 className='text-md mb-3'>{user.email}</h1>
                         </div>
                         <li>

@@ -22,7 +22,7 @@ const Dashboard = () => {
                 <div className="drawer-content">
                     <Outlet></Outlet>
                 </div>
-                <div className="drawer-side ">
+                <div className="drawer-side">
                     <label htmlFor="dashboard-sidebar" className="drawer-overlay"></label>
                     <ul className="menu p-4 h-full w-64 lg:bg-inherit bg-base-100 text-base-content">
                         <Link to='/'>
@@ -78,7 +78,7 @@ const Dashboard = () => {
                                     </li>
                                     <li>
                                         <ActiveLink to='/dashboard/payment-history'>
-                                            <MdHistory className='text-xl'/>
+                                            <MdHistory className='text-xl' />
                                             <span>Payment History</span>
                                         </ActiveLink>
                                     </li>

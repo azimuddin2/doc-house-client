@@ -1,6 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Sacramento&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.font-family {
+  font-family: 'Sacramento', cursive;
+}
 
 body {
   margin: 0;
