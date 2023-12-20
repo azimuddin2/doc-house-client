@@ -1,11 +1,35 @@
 import React from 'react';
 import { RiDeleteBin5Line } from 'react-icons/ri';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import swal from 'sweetalert';
 
 const DoctorRow = ({ index, doctor, refetch }) => {
+    const [axiosSecure] = useAxiosSecure();
     const { image, name, email, specialty } = doctor;
 
-    const handleDelete = () => {
-
+    const handleDelete = (doctor) => {
+        swal({
+            title: "Are you sure?",
+            text: `Doctor Name - ${doctor.name}`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    axiosSecure.delete(`/doctors/${doctor._id}`)
+                        .then(result => {
+                            if (result.data.deletedCount > 0) {
+                                refetch();
+                                swal({
+                                    text: `${doctor.name} has been deleted!`,
+                                    icon: "success",
+                                    timer: 6000,
+                                });
+                            }
+                        })
+                }
+            });
     };
 
     return (
