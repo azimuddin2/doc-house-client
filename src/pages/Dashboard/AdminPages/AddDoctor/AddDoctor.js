@@ -5,9 +5,14 @@ import { IoIosArrowDown } from "react-icons/io";
 import { BsCheck2Circle } from "react-icons/bs";
 import uploadPhoto from '../../../../assets/Icons/upload-photo.svg';
 import Title from '../../../../components/Title/Title';
+import useAxiosSecure from '../../../../hooks/useAxiosSecure';
+import swal from 'sweetalert';
+import { useNavigate } from 'react-router-dom';
 
 const AddDoctor = () => {
+    const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const navigate = useNavigate();
 
     const specialtys = [
         "Teeth Orthodontics",
@@ -18,14 +23,55 @@ const AddDoctor = () => {
         "Pediatric Dental"
     ];
 
+    const imgHostingToken = process.env.REACT_APP_Image_Upload_Token;
+    const imgHostinURL = `https://api.imgbb.com/1/upload?key=${imgHostingToken}`
+
     const onSubmit = (data) => {
-        console.log(data);
+        const formData = new FormData();
+        formData.append('image', data.image[0]);
+
+        fetch(imgHostinURL, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(imgResult => {
+                if (imgResult.success) {
+                    const imgURL = imgResult.data.display_url;
+                    const { name, email, specialty } = data;
+
+                    const addNewDoctor = {
+                        name,
+                        email,
+                        specialty,
+                        image: imgURL
+                    };
+                    axiosSecure.post('/doctors', addNewDoctor)
+                        .then(result => {
+                            if (result.data.insertedId) {
+                                reset();
+                                swal({
+                                    title: "Doctor added successfully",
+                                    icon: "success",
+                                    timer: 6000,
+                                });
+                                navigate('/dashboard/manage-doctors');
+                            }
+                            else {
+                                swal({
+                                    title: `${result.data.message}`,
+                                    icon: "warning",
+                                });
+                            }
+                        })
+                }
+            })
     };
 
     return (
         <section className='my-12'>
             <Title heading={'Welcome to Doc House'} title={'Add a new doctor'}></Title>
-            <div className='px-5 py-8 lg:p-12 w-11/12 lg:w-1/2 mx-auto bg-[#F1F5F9]'>
+            <div className='rounded px-5 py-8 lg:p-12 w-11/12 lg:w-1/2 mx-auto bg-[#F1F5F9]'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control">
                         <label className="label">
