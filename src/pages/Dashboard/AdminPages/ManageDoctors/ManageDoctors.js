@@ -12,8 +12,8 @@ import { IoSearch } from 'react-icons/io5';
 const ManageDoctors = () => {
     const [axiosSecure] = useAxiosSecure();
     const { doctorsCount } = useLoaderData();
-    const [search, setSearch] = useState('');
     const searchRef = useRef();
+    const [search, setSearch] = useState('');
 
     const { data: doctors = [], isLoading, error, refetch } = useQuery({
         queryKey: ['doctors', search],
@@ -42,27 +42,29 @@ const ManageDoctors = () => {
                     (
                         <div className='bg-[#F1F5F9] h-full py-12 lg:py-20'>
                             <div className='w-11/12 lg:w-3/4 mx-auto bg-white p-5 lg:p-10'>
-                                <div className='lg:flex items-center justify-between mb-3 lg:mb-5'>
-                                    <h2 className='text-xl lg:text-2xl font-semibold text-primary'>Manage All Doctors: 0{doctorsCount}</h2>
-                                    <div className="join w-full lg:w-1/2 mt-2 lg:mt-0 flex">
-                                        <input
-                                            type='text'
-                                            ref={searchRef}
-                                            className="input input-sm w-full rounded input-bordered join-item focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-                                            placeholder="Search for doctor..."
-                                        />
-                                        <button
-                                            className="btn btn-sm join-item rounded bg-primary hover:bg-secondary text-white"
-                                            onClick={handleSearch}
-                                        >
-                                            <IoSearch className='text-xl' />
-                                        </button>
-                                    </div>
-                                </div>
                                 <div>
-                                    {
-                                        search && <h2 className='text-lg flex justify-end text-primary mb-1'>Matching Results: 0{doctors?.length}</h2>
-                                    }
+                                    <div className='lg:flex items-center justify-between mb-3 lg:mb-5'>
+                                        <h2 className='text-xl lg:text-2xl font-semibold text-primary'>Manage All Doctors: 0{doctorsCount}</h2>
+                                        <div className="join w-full lg:w-1/2 mt-2 lg:mt-0 flex">
+                                            <input
+                                                type='text'
+                                                ref={searchRef}
+                                                className="input input-sm w-full rounded input-bordered join-item focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                                placeholder="Search for doctor..."
+                                            />
+                                            <button
+                                                className="btn btn-sm join-item rounded bg-primary hover:bg-secondary text-white"
+                                                onClick={handleSearch}
+                                            >
+                                                <IoSearch className='text-xl' />
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        {
+                                            search && <h2 className='text-lg flex justify-end text-primary mb-1'>Matching Results: 0{doctors?.length}</h2>
+                                        }
+                                    </div>
                                 </div>
                                 <div className="overflow-x-auto">
                                     <table className="table">
