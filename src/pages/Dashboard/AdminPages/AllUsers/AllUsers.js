@@ -7,8 +7,10 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { IoSearch } from 'react-icons/io5';
 import { useLoaderData } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import useTitle from '../../../../hooks/useTitle';
 
 const AllUsers = () => {
+    useTitle('All Users');
     const [axiosSecure] = useAxiosSecure();
     const searchRef = useRef();
     const [search, setSearch] = useState('');

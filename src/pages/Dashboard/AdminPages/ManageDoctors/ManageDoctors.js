@@ -8,8 +8,10 @@ import doctorsGif from '../../../../assets/Images/doctors.gif';
 import { Link, useLoaderData } from 'react-router-dom';
 import { FiArrowRightCircle } from 'react-icons/fi';
 import { IoSearch } from 'react-icons/io5';
+import useTitle from '../../../../hooks/useTitle';
 
 const ManageDoctors = () => {
+    useTitle('Manage Doctors');
     const [axiosSecure] = useAxiosSecure();
     const { doctorsCount } = useLoaderData();
     const searchRef = useRef();

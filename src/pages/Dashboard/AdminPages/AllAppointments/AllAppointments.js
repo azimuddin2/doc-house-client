@@ -8,8 +8,10 @@ import ReactDatePicker from 'react-datepicker';
 import { MdOutlineDateRange } from 'react-icons/md';
 import { format } from 'date-fns';
 import searchGif from '../../../../assets/Images/search.gif';
+import useTitle from '../../../../hooks/useTitle';
 
 const AllAppointments = () => {
+    useTitle('All Appointments');
     const [axiosSecure] = useAxiosSecure();
     const [selectDate, setSelectDate] = useState(new Date());
     const formatDate = format(selectDate, 'PP');

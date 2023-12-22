@@ -8,8 +8,10 @@ import Title from '../../../../components/Title/Title';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
+import useTitle from '../../../../hooks/useTitle';
 
 const AddDoctor = () => {
+    useTitle('Add Doctor');
     const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
