@@ -104,7 +104,7 @@ const AllUsers = () => {
                 </div>
             </div>
             {/* pagination */}
-            <div className='flex items-center justify-center mt-10'>
+            <div className='flex items-center justify-center mt-6 lg:mt-10'>
                 <button
                     onClick={handlePrevClick}
                     disabled={currentPage === 0}
