@@ -28,7 +28,7 @@ const AllUsers = () => {
         <div className='bg-[#F1F5F9] h-full py-16'>
             <div className='w-11/12 lg:w-3/4 mx-auto bg-white p-5 lg:p-10'>
                 <div className='mb-4'>
-                    <h2 className='text-xl uppercase font-bold text-primary'>All Users: {users?.length}</h2>
+                    <h2 className='text-xl lg:text-2xl font-semibold text-primary'>All Users: 0{users?.length}</h2>
                 </div>
                 <div className="overflow-x-auto">
                     <table className="table">

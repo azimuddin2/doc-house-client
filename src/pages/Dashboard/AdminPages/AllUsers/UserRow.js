@@ -57,17 +57,19 @@ const UserRow = ({ index, user, refetch }) => {
             <td>{index + 1}</td>
 
             <td>
-                <div>
-                    {
-                        image ?
-                            <div className="w-12 flex items-center rounded-full border">
-                                <img src={image} alt='userImg' className='w-full rounded-full' />
-                            </div>
+                {
+                    image ?
+                        <div className="w-12 flex items-center rounded-full border">
+                            <img src={image} alt='userImg' className='w-full rounded-full' />
+                        </div>
 
-                            :
-                            <FaCircleUser className='text-4xl text-accent' />
-                    }
-                </div>
+                        :
+                        <div className="avatar placeholder">
+                            <div className="bg-primary text-white rounded-full w-10 ring ring-secondary ring-offset-base-100 ring-offset-2">
+                                <span className="text-2xl">{name.slice(0, 1)}</span>
+                            </div>
+                        </div>
+                }
             </td>
 
             <td>
