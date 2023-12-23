@@ -9,6 +9,7 @@ import { Link, useLoaderData } from 'react-router-dom';
 import { FiArrowRightCircle } from 'react-icons/fi';
 import { IoSearch } from 'react-icons/io5';
 import useTitle from '../../../../hooks/useTitle';
+import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 const ManageDoctors = () => {
     useTitle('Manage Doctors');
@@ -16,18 +17,34 @@ const ManageDoctors = () => {
     const { doctorsCount } = useLoaderData();
     const searchRef = useRef();
     const [search, setSearch] = useState('');
+    const [currentPage, setCurrentPage] = useState(0);
+    const [limitPerPage, setLimitPerPage] = useState(6);
 
-    const { data: doctors = [], isLoading, error, refetch } = useQuery({
-        queryKey: ['doctors', search],
-        queryFn: async () => {
-            const res = await axiosSecure.get(`/doctors?search=${search}`)
-            return res.data;
+    const totalPages = Math.ceil(doctorsCount / limitPerPage);
+
+    const handlePrevClick = () => {
+        if (currentPage > 0) {
+            setCurrentPage(currentPage - 1);
         }
-    })
+    };
+
+    const handleNextClick = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
 
     const handleSearch = () => {
         setSearch(searchRef.current.value);
     };
+
+    const { data: doctors = [], isLoading, error, refetch } = useQuery({
+        queryKey: ['doctors', currentPage, limitPerPage, search],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/doctors?page=${currentPage}&limit=${limitPerPage}&search=${search}`);
+            return res.data;
+        }
+    })
 
     if (error) {
         return <ErrorElement message={error.message}></ErrorElement>
@@ -46,7 +63,7 @@ const ManageDoctors = () => {
                             <div className='w-11/12 lg:w-3/4 mx-auto bg-white p-5 lg:p-10'>
                                 <div>
                                     <div className='lg:flex items-center justify-between mb-3 lg:mb-5'>
-                                        <h2 className='text-xl lg:text-2xl font-semibold text-primary'>Manage All Doctors: 0{doctorsCount}</h2>
+                                        <h2 className='text-xl lg:text-2xl font-semibold text-primary'>Manage All Doctors: {doctorsCount}</h2>
                                         <div className="join w-full lg:w-1/2 mt-2 lg:mt-0 flex">
                                             <input
                                                 type='text'
@@ -91,6 +108,24 @@ const ManageDoctors = () => {
                                         </tbody>
                                     </table>
                                 </div>
+                            </div>
+                            {/* pagination */}
+                            <div className='flex items-center justify-center mt-6 lg:mt-10'>
+                                <button
+                                    onClick={handlePrevClick}
+                                    disabled={currentPage === 0}
+                                    className='btn btn-primary text-white btn-sm mr-3'
+                                >
+                                    <MdKeyboardArrowLeft className='text-xl' /> Previous
+                                </button>
+
+                                <button
+                                    onClick={handleNextClick}
+                                    disabled={currentPage === totalPages}
+                                    className='btn btn-sm btn-primary text-white'
+                                >
+                                    Next <MdKeyboardArrowRight className='text-xl' />
+                                </button>
                             </div>
                         </div>
                     )
