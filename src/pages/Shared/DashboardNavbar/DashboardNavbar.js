@@ -6,7 +6,6 @@ import logo from '../../../assets/Images/logo.png';
 import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { CgLogOut } from "react-icons/cg";
 import { BiSolidEdit } from 'react-icons/bi';
-import { FaCircleUser } from 'react-icons/fa6';
 
 const DashboardNavbar = () => {
     const { user, logout } = useAuth();
@@ -48,27 +47,37 @@ const DashboardNavbar = () => {
                         <div>
                             {
                                 user.photoURL ?
-                                    <div style={{ border: '2px solid #F7A582' }} className="w-10 rounded-full">
-                                        <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
+                                    <div className="avatar online">
+                                        <div className="w-10 rounded-full">
+                                            <img src={user.photoURL} alt="" />
+                                        </div>
                                     </div>
                                     :
-                                    <FaCircleUser className='text-white text-3xl' />
+                                    <div className="avatar online placeholder">
+                                        <div className="bg-accent text-white rounded-full w-10">
+                                            <span className="text-2xl">{user.displayName.slice(0, 1)}</span>
+                                        </div>
+                                    </div>
                             }
                         </div>
                     </label>
                     <ul tabIndex={0} className="menu menu-sm dropdown-content mt-4 z-[1] py-8 px-6 shadow bg-primary text-white rounded-box w-80">
                         <div className='text-center mb-4'>
-                            <div className="avatar">
-                                <div>
-                                    {
-                                        user.photoURL ?
-                                            <div style={{ border: '2px solid #F7A582' }} className="w-20 rounded-full">
-                                                <img src={user.photoURL} alt='userImg' className='w-full rounded-full' />
+                            <div>
+                                {
+                                    user.photoURL ?
+                                        <div className="avatar online">
+                                            <div className="w-20 rounded-full">
+                                                <img src={user.photoURL} alt="" />
                                             </div>
-                                            :
-                                            <FaCircleUser className='text-white text-7xl' />
-                                    }
-                                </div>
+                                        </div>
+                                        :
+                                        <div className="avatar online placeholder">
+                                            <div className="bg-accent text-white rounded-full w-20">
+                                                <span className="text-5xl">{user.displayName.slice(0, 1)}</span>
+                                            </div>
+                                        </div>
+                                }
                             </div>
                             <h1 className='text-lg font-medium mt-1'>Hi, {user.displayName}!</h1>
                             <h1 className='text-md mb-3'>{user.email}</h1>
