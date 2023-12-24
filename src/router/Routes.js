@@ -92,7 +92,10 @@ const router = createBrowserRouter([
             },
             {
                 path: 'manage-doctors',
-                element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>
+                element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>,
+                loader: async () => {
+                    return fetch('http://localhost:5000/doctorsCount');
+                }
             },
             {
                 path: 'all-appointments',
