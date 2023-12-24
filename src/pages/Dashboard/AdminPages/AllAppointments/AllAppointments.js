@@ -14,7 +14,7 @@ const AllAppointments = () => {
     const [selectDate, setSelectDate] = useState(new Date());
     const formatDate = format(selectDate, 'PP');
 
-    const { data: allAppointments = [], isLoading, error } = useQuery({
+    const { data: allAppointments = [], isLoading, error, refetch } = useQuery({
         queryKey: ['bookings', formatDate],
         queryFn: async () => {
             const res = await axiosSecure.get(`/bookings?date=${formatDate}`)
@@ -31,7 +31,7 @@ const AllAppointments = () => {
     }
 
     return (
-        <div className='bg-[#F1F5F9] h-full py-20'>
+        <div className='bg-[#F1F5F9] h-full py-12 lg:py-20'>
             <div className='w-11/12 lg:w-4/5 mx-auto bg-white p-5 lg:p-10'>
 
                 <div className='mb-4 md:flex items-center justify-between'>
@@ -61,7 +61,7 @@ const AllAppointments = () => {
                                             <th>Treatment</th>
                                             <th>Treatment Date & Time</th>
                                             <th>Price</th>
-                                            <th>Payment</th>
+                                            <th>Payment Status</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -70,6 +70,7 @@ const AllAppointments = () => {
                                                 key={appointment._id}
                                                 index={index}
                                                 appointment={appointment}
+                                                refetch={refetch}
                                             ></AppointmentRow>)
                                         }
                                     </tbody>
