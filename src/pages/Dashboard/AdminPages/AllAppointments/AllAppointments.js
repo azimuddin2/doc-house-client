@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import AppointmentRow from './AppointmentRow';
+import ReactDatePicker from 'react-datepicker';
+import { MdOutlineDateRange } from 'react-icons/md';
+import { format } from 'date-fns';
+import searchGif from '../../../../assets/Images/search.gif';
 
 const AllAppointments = () => {
     const [axiosSecure] = useAxiosSecure();
+    const [selectDate, setSelectDate] = useState(new Date());
+    const formatDate = format(selectDate, 'PP');
 
     const { data: allAppointments = [], isLoading, error } = useQuery({
-        queryKey: ['bookings'],
+        queryKey: ['bookings', formatDate],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/bookings`)
+            const res = await axiosSecure.get(`/bookings?date=${formatDate}`)
             return res.data;
         }
     })
@@ -25,34 +31,59 @@ const AllAppointments = () => {
     }
 
     return (
-        <div className='bg-[#F1F5F9] h-full py-16'>
+        <div className='bg-[#F1F5F9] h-full py-20'>
             <div className='w-11/12 lg:w-4/5 mx-auto bg-white p-5 lg:p-10'>
-                <div className='mb-4'>
-                    <h2 className='text-xl lg:text-2xl font-semibold text-primary'>All Appointments: 0{allAppointments?.length}</h2>
+
+                <div className='mb-4 md:flex items-center justify-between'>
+                    <h2 className='text-xl lg:text-2xl font-semibold text-primary text-center'>All Appointments: 0{allAppointments?.length}</h2>
+                    <div className='relative bg-primary rounded-md mt-3 lg:mt-0'>
+                        <ReactDatePicker
+                            name='date'
+                            className="w-full input input-sm input-bordered focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
+                            showIcon
+                            selected={selectDate}
+                            onChange={(date) => setSelectDate(date)}
+                            dateFormat="MMM d, yyyy"
+                        ></ReactDatePicker>
+                        <MdOutlineDateRange className='text-lg mr-2 absolute right-1 top-2 text-white'></MdOutlineDateRange>
+                    </div>
                 </div>
+
                 <div className="overflow-x-auto">
-                    <table className="table">
-                        <thead className='bg-[#E6E6E6] text-primary uppercase'>
-                            <tr>
-                                <th></th>
-                                <th>Name & Email</th>
-                                <th>Treatment</th>
-                                <th>Treatment Date & Time</th>
-                                <th>Price</th>
-                                <th>Payment</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                allAppointments?.map((appointment, index) => <AppointmentRow
-                                    key={appointment._id}
-                                    index={index}
-                                    appointment={appointment}
-                                ></AppointmentRow>)
-                            }
-                        </tbody>
-                    </table>
+                    {
+                        allAppointments.length > 0 ?
+                            (
+                                <table className="table">
+                                    <thead className='bg-[#E6E6E6] text-primary uppercase'>
+                                        <tr>
+                                            <th></th>
+                                            <th>Name & Email</th>
+                                            <th>Treatment</th>
+                                            <th>Treatment Date & Time</th>
+                                            <th>Price</th>
+                                            <th>Payment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            allAppointments?.map((appointment, index) => <AppointmentRow
+                                                key={appointment._id}
+                                                index={index}
+                                                appointment={appointment}
+                                            ></AppointmentRow>)
+                                        }
+                                    </tbody>
+                                </table>
+                            )
+                            :
+                            (
+                                <div>
+                                    <img src={searchGif} alt="" className='mx-auto' />
+                                </div>
+                            )
+                    }
                 </div>
+
             </div>
         </div>
     );

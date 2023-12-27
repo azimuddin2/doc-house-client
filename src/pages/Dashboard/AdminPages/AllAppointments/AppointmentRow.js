@@ -1,5 +1,6 @@
 import React from 'react';
 import { GoCheckCircleFill } from 'react-icons/go';
+import { MdAutoDelete, MdOutlineAutoDelete } from 'react-icons/md';
 
 const AppointmentRow = ({ index, appointment }) => {
     const { patientName, patientEmail, treatment, date, slot, price, paid, transactionId } = appointment;
@@ -37,6 +38,9 @@ const AppointmentRow = ({ index, appointment }) => {
                         <>
                             <span className="loading loading-spinner loading-xs mr-1 text-secondary"></span>
                             <span className='capitalize text-secondary'>Pending</span>
+                            <span >
+                                <MdAutoDelete className='text-2xl text-secondary ml-1 cursor-pointer' />
+                            </span>
                         </>
                 }
             </td>
