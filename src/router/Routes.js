@@ -84,7 +84,10 @@ const router = createBrowserRouter([
             },
             {
                 path: 'all-users',
-                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
+                element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
+                loader: async () => {
+                    return fetch('http://localhost:5000/usersCount')
+                }
             },
             {
                 path: 'add-doctor',

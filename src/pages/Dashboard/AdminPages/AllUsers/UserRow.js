@@ -1,6 +1,5 @@
 import React from 'react';
 import { RiAdminLine, RiDeleteBin5Line } from 'react-icons/ri';
-import { FaCircleUser } from "react-icons/fa6";
 import swal from 'sweetalert';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
@@ -9,12 +8,9 @@ const UserRow = ({ index, user, refetch }) => {
     const { image, name, email, role } = user;
 
     const handleMakeAdmin = (user) => {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
-            method: 'PATCH'
-        })
-            .then(res => res.json())
+        axiosSecure.patch(`/users/admin/${user._id}`)
             .then(result => {
-                if (result.modifiedCount) {
+                if (result.data.modifiedCount) {
                     refetch();
                     swal({
                         icon: 'success',
@@ -55,14 +51,12 @@ const UserRow = ({ index, user, refetch }) => {
     return (
         <tr className='font-semibold'>
             <td>{index + 1}</td>
-
             <td>
                 {
                     image ?
                         <div className="w-12 flex items-center rounded-full border">
                             <img src={image} alt='userImg' className='w-full rounded-full' />
                         </div>
-
                         :
                         <div className="avatar placeholder">
                             <div className="bg-primary text-white rounded-full w-10 ring ring-secondary ring-offset-base-100 ring-offset-2">
@@ -71,13 +65,11 @@ const UserRow = ({ index, user, refetch }) => {
                         </div>
                 }
             </td>
-
             <td>
                 {name}
                 <br />
                 <span className="badge badge-ghost badge-sm">{email}</span>
             </td>
-
             <td>
                 {
                     role === 'admin' ?
@@ -91,7 +83,6 @@ const UserRow = ({ index, user, refetch }) => {
                         </span>
                 }
             </td>
-
             <td>
                 <span className='tooltip' data-tip="Delete">
                     <RiDeleteBin5Line
@@ -100,7 +91,6 @@ const UserRow = ({ index, user, refetch }) => {
                     />
                 </span>
             </td>
-
         </tr>
     );
 };
