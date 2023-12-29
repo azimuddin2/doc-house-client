@@ -54,8 +54,10 @@ const UserRow = ({ index, user, refetch }) => {
             <td>
                 {
                     image ?
-                        <div className="w-12 flex items-center rounded-full border">
-                            <img src={image} alt='userImg' className='w-full rounded-full' />
+                        <div className="avatar">
+                            <div className="rounded-full w-10 ring ring-primary ring-offset-base-100 ring-offset-2">
+                                <img src={image} alt="" />
+                            </div>
                         </div>
                         :
                         <div className="avatar placeholder">

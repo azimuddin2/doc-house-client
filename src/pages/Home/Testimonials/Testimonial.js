@@ -9,11 +9,20 @@ const Testimonial = ({ testimonial }) => {
         <div className="card p-6 border mt-20 lg:mt-8 ">
             <div className='flex items-center justify-between'>
                 <div className='md:flex items-center'>
-                    <div className="avatar">
-                        <div className="w-14 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-1">
-                            <img src={image} alt={name} />
-                        </div>
-                    </div>
+                    {
+                        image === null ?
+                            <div className="avatar placeholder">
+                                <div className="bg-primary text-white rounded-full w-12 ring ring-secondary ring-offset-base-100 ring-offset-2">
+                                    <span className="text-3xl">{name.slice(0, 1)}</span>
+                                </div>
+                            </div>
+                            :
+                            <div className="avatar">
+                                <div className="w-12 rounded-full ring ring-secondary ring-offset-base-100 ring-offset-2">
+                                    <img src={image} alt={name} />
+                                </div>
+                            </div>
+                    }
                     <div className='ml-5'>
                         <h2 className='text-base lg:text-xl font-bold text-neutral'>{name}</h2>
                         <p className='font-semibold text-accent'>{location}</p>

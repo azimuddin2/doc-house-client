@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useTitle from '../../../../hooks/useTitle';
@@ -9,37 +9,49 @@ import { MdOutlineErrorOutline } from 'react-icons/md';
 import StarRatings from 'react-star-ratings';
 import Button from '../../../../components/Button/Button';
 import Title from '../../../../components/Title/Title';
+import { IoIosArrowDown } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
 
 const AddReview = () => {
     useTitle('Add Review');
     const { user } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
-
+    const [countries, setCountries] = useState([]);
     const [rating, setRating] = useState(0);
+    const navigate = useNavigate();
 
     const changeRating = (newRating, name) => {
         setRating(newRating);
     };
 
+    useEffect(() => {
+        fetch('https://restcountries.com/v3.1/all')
+            .then(res => res.json())
+            .then(data => setCountries(data))
+    }, [])
+
+
     const onSubmit = (data) => {
-        const { name, details } = data;
+        const { name, location, description } = data;
 
         const reviewInfo = {
             rating,
             name,
-            email: user?.email,
-            details
+            location,
+            description,
+            image: user?.photoURL || null
         };
         axiosSecure.post('/reviews', reviewInfo)
             .then(result => {
                 if (result.data.insertedId) {
                     reset();
                     swal({
-                        title: "Review successfully",
+                        title: "Review added successfully",
                         icon: "success",
                         timer: 5000,
-                    });
+                    })
+                    navigate('/reviews')
                 }
             })
     };
@@ -47,7 +59,7 @@ const AddReview = () => {
     return (
         <div className='my-12'>
             <Title heading={'Sharing is Caring'} title={'Give a Review'}></Title>
-            <div className='px-5 py-8 lg:p-12 w-11/12 lg:w-3/5 mx-auto bg-[#F1F5F9]'>
+            <div className='px-5 py-8 lg:p-12 w-11/12 lg:w-3/5 mx-auto bg-[#F1F5F9] rounded'>
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className='text-center mb-6'>
                         <h2 className='text-xl uppercase font-medium mb-2'>Rate Us!</h2>
@@ -62,6 +74,7 @@ const AddReview = () => {
                         />
                     </div>
                     <div className='grid grid-cols-1 mb-5'>
+
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-semibold">Name*</span>
@@ -82,25 +95,40 @@ const AddReview = () => {
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.name.message}</span>}
                             </label>
                         </div>
-                        <div className="form-control">
-                            <label className="label">
-                                <span className="label-text font-semibold">Email*</span>
+
+                        <div className="form-control relative">
+                            <label className="label" >
+                                <span className="label-text font-semibold">Country*</span>
                             </label>
-                            <input
-                                {...register("email")}
-                                type='email'
-                                defaultValue={user?.email}
-                                disabled
-                                style={{ background: '#fff' }}
+                            <select
+                                {...register("location", {
+                                    required: {
+                                        value: true,
+                                        message: 'Country is required',
+                                    }
+                                })}
+                                type='text'
                                 className="input rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
-                            />
+                            >
+                                {
+                                    countries?.map(country => <option
+                                        key={country.cca3}
+                                        country={country}
+                                    >{country.name.common}</option>)
+                                }
+                            </select>
+                            <IoIosArrowDown className='text-xl mr-3 absolute right-1 top-12' />
+                            <label className="label pt-1">
+                                {errors.location?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.location.message}</span>}
+                            </label>
                         </div>
+
                         <div className="form-control mt-3">
                             <label className="label">
                                 <span className="label-text font-semibold">Review Message*</span>
                             </label>
                             <textarea
-                                {...register("details", {
+                                {...register("description", {
                                     required: {
                                         value: true,
                                         message: 'Review Message details is required'
@@ -113,9 +141,10 @@ const AddReview = () => {
                                 rows="5"
                             ></textarea>
                             <label className="label pt-1">
-                                {errors.details?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.details.message}</span>}
+                                {errors.description?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.description.message}</span>}
                             </label>
                         </div>
+
                     </div>
                     <Button>Send Review <IoRocketSharp className='text-xl' /></Button>
                 </form>
