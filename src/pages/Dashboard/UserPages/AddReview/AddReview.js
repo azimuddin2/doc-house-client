@@ -31,7 +31,6 @@ const AddReview = () => {
             .then(data => setCountries(data))
     }, [])
 
-
     const onSubmit = (data) => {
         const { name, location, description } = data;
 
@@ -74,7 +73,6 @@ const AddReview = () => {
                         />
                     </div>
                     <div className='grid grid-cols-1 mb-5'>
-
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text font-semibold">Name*</span>
@@ -95,7 +93,6 @@ const AddReview = () => {
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.name.message}</span>}
                             </label>
                         </div>
-
                         <div className="form-control relative">
                             <label className="label" >
                                 <span className="label-text font-semibold">Country*</span>
@@ -122,7 +119,6 @@ const AddReview = () => {
                                 {errors.location?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.location.message}</span>}
                             </label>
                         </div>
-
                         <div className="form-control mt-3">
                             <label className="label">
                                 <span className="label-text font-semibold">Review Message*</span>
@@ -144,7 +140,6 @@ const AddReview = () => {
                                 {errors.description?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.description.message}</span>}
                             </label>
                         </div>
-
                     </div>
                     <Button>Send Review <IoRocketSharp className='text-xl' /></Button>
                 </form>

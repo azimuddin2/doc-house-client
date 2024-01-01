@@ -49,7 +49,7 @@ const DashboardNavbar = () => {
                                 user.photoURL ?
                                     <div className="avatar online">
                                         <div className="w-10 rounded-full">
-                                            <img src={user.photoURL} alt="" />
+                                            <img src={user.photoURL} alt="userImg" />
                                         </div>
                                     </div>
                                     :
@@ -68,7 +68,7 @@ const DashboardNavbar = () => {
                                     user.photoURL ?
                                         <div className="avatar online">
                                             <div className="w-20 rounded-full">
-                                                <img src={user.photoURL} alt="" />
+                                                <img src={user.photoURL} alt="userImg" />
                                             </div>
                                         </div>
                                         :

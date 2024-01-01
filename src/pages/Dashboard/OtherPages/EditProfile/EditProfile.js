@@ -8,8 +8,10 @@ import Title from '../../../../components/Title/Title';
 import uploadIcon from '../../../../assets/Icons/upload-photo.svg';
 import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import swal from 'sweetalert';
+import useTitle from '../../../../hooks/useTitle';
 
 const EditProfile = () => {
+    useTitle('Edit Profile');
     const { user, updateUserProfile } = useAuth();
     const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -77,14 +79,12 @@ const EditProfile = () => {
         <section className='my-10'>
             <Title heading={'My Information'} title={'Update Profile'}></Title>
             <div className='px-5 py-8 lg:p-12 mt-20 w-11/12 lg:w-1/2 mx-auto bg-[#F1F5F9] rounded-lg'>
-
-
                 <div className='text-center mb-4'>
                     {
                         user.photoURL ?
                             <div className="avatar online mt-[-100px]">
                                 <div className="w-28 rounded-full">
-                                    <img src={user.photoURL} alt="" />
+                                    <img src={user.photoURL} alt="userImg" />
                                 </div>
                             </div>
                             :
@@ -97,8 +97,6 @@ const EditProfile = () => {
                             </div>
                     }
                 </div>
-
-
                 <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-control w-full">
                         <label
@@ -125,7 +123,6 @@ const EditProfile = () => {
                             {errors.image?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.image.message}</span>}
                         </label>
                     </div>
-
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text font-semibold">Name*</span>
@@ -146,7 +143,6 @@ const EditProfile = () => {
                             {errors.name?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.name.message}</span>}
                         </label>
                     </div>
-
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text font-semibold">Email*</span>
@@ -160,7 +156,6 @@ const EditProfile = () => {
                             className="input rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                         />
                     </div>
-
                     <div className="form-control mb-5 mt-2">
                         <label className="label">
                             <span className="label-text font-semibold">Phone Number*</span>
@@ -180,13 +175,10 @@ const EditProfile = () => {
                             {errors.phone?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.phone.message}</span>}
                         </label>
                     </div>
-
                     <div className='text-center'>
                         <Button>Update Profile<FiCheckCircle className='text-xl'></FiCheckCircle></Button>
                     </div>
                 </form>
-
-
             </div>
         </section>
     );

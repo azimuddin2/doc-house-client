@@ -70,6 +70,13 @@ const Login = () => {
             })
     };
 
+    swal({
+        title: "Admin Access🔥",
+        text: "📧Email: admin@gmail.com & 🔑Password: 123456@",
+        icon: "info",
+        button: "Close",
+    });
+
     return (
         <section className='grid grid-cols-1 lg:grid-cols-2'>
             <div className='bg-primary pb-14'>

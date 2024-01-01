@@ -42,7 +42,7 @@ const MyAppointment = () => {
                         <div className='bg-[#F1F5F9] h-full py-16'>
                             <div className='w-11/12 lg:w-4/5 mx-auto bg-white p-5 lg:p-10'>
                                 <div className='mb-4'>
-                                    <h2 className='text-xl lg:text-2xl font-semibold text-primary'>My Appointment:- 0{bookings?.length}</h2>
+                                    <h2 className='text-xl lg:text-2xl font-semibold text-primary'>My Appointment: 0{bookings?.length}</h2>
                                 </div>
                                 <div className="overflow-x-auto">
                                     <table className="table">
@@ -51,7 +51,7 @@ const MyAppointment = () => {
                                                 <th></th>
                                                 <th>Name</th>
                                                 <th>Treatment</th>
-                                                <th>Date & Time</th>
+                                                <th>Treatment Date & Time</th>
                                                 <th>Price</th>
                                                 <th>Payment</th>
                                             </tr>
