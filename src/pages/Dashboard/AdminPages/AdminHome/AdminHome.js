@@ -92,7 +92,6 @@ const AdminHome = () => {
                     </div>
                 </div>
             </div>
-
             <div className='mt-5'>
                 <DashboardCharts></DashboardCharts>
             </div>

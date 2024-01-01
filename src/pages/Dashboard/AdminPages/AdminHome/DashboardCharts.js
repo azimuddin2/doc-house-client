@@ -1,5 +1,5 @@
 import React from 'react';
-import { Area, AreaChart, Bar, BarChart, CartesianGrid, Cell, Legend, Pie, PieChart, Rectangle, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import { curveCardinal } from 'd3-shape';
 
 const DashboardCharts = () => {
@@ -66,74 +66,44 @@ const DashboardCharts = () => {
 
     const data = [
         {
-            name: 'Jan',
-            uv: 4000,
-            pv: 2400,
-            amt: 2400,
-        },
-        {
-            name: 'Feb',
-            uv: 3000,
-            pv: 1398,
-            amt: 2210,
-        },
-        {
-            name: 'Mar',
+            name: '2018',
             uv: 2000,
-            pv: 9800,
-            amt: 2290,
-        },
-        {
-            name: 'Apr',
-            uv: 2780,
-            pv: 3908,
-            amt: 2000,
-        },
-        {
-            name: 'May',
-            uv: 1890,
-            pv: 4800,
-            amt: 2181,
-        },
-        {
-            name: 'Jun',
-            uv: 2390,
             pv: 3800,
             amt: 2500,
         },
         {
-            name: 'Jul',
+            name: '2019',
             uv: 3000,
             pv: 4300,
             amt: 2100,
         },
         {
-            name: 'Aug',
-            uv: 3490,
+            name: '2020',
+            uv: 2700,
             pv: 4300,
             amt: 2100,
         },
         {
-            name: 'Sep',
-            uv: 3490,
+            name: '2021',
+            uv: 2000,
             pv: 4300,
             amt: 2100,
         },
         {
-            name: 'Oct',
-            uv: 3490,
+            name: '2022',
+            uv: 3000,
             pv: 4300,
             amt: 2100,
         },
         {
-            name: 'Nov',
-            uv: 3490,
+            name: '2023',
+            uv: 4000,
             pv: 4300,
             amt: 2100,
         },
         {
-            name: 'Dec',
-            uv: 3490,
+            name: '2024',
+            uv: 1600,
             pv: 4300,
             amt: 2100,
         },
@@ -143,9 +113,8 @@ const DashboardCharts = () => {
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
-
             <div className='bg-white rounded-lg p-5'>
-                <h2 className='text-accent text-xl font-semibold border-b pb-3'>Patients 2023 Overview</h2>
+                <h2 className='text-accent text-xl font-semibold border-b pb-3'>Patients Overview</h2>
                 <ResponsiveContainer width="100%" height={300}>
                     <AreaChart
                         width={'100%'}
@@ -162,14 +131,13 @@ const DashboardCharts = () => {
                         <XAxis dataKey="name" />
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#8884d8" fill="#7BB13C" fillOpacity={0.3} />
-                        <Area type={cardinal} dataKey="uv" stroke="#82ca9d" fill="#82ca9d" fillOpacity={0.3} />
+                        <Area type="monotone" dataKey="uv" stroke="#FFBC34" fill="#7BB13C" fillOpacity={0.3} />
+                        <Area type={cardinal} dataKey="uv" stroke="#7BB13C" fill="#82ca9d" fillOpacity={0.3} />
                     </AreaChart>
                 </ResponsiveContainer>
             </div>
-
             <div className='bg-white rounded-lg p-6'>
-                <h2 className='text-accent text-xl font-semibold border-b pb-3'>Appointment</h2>
+                <h2 className='text-accent text-xl font-semibold border-b pb-3'>Appointment Overview</h2>
                 <ResponsiveContainer width={'100%'} height={300}>
                     <PieChart>
                         <Pie
@@ -190,7 +158,6 @@ const DashboardCharts = () => {
                     </PieChart>
                 </ResponsiveContainer>
             </div>
-
         </div>
     );
 };
