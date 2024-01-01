@@ -7,6 +7,7 @@ import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
+import DashboardCharts from './DashboardCharts';
 
 const AdminHome = () => {
     useTitle('Dashboard');
@@ -92,8 +93,8 @@ const AdminHome = () => {
                 </div>
             </div>
 
-            <div className=''>
-
+            <div className='mt-5'>
+                <DashboardCharts></DashboardCharts>
             </div>
         </div>
     );
