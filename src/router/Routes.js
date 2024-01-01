@@ -43,7 +43,7 @@ const router = createBrowserRouter([
                 path: '/doctor-profile/:id',
                 element: <DoctorProfile></DoctorProfile>,
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/doctor-profile/${params.id}`)
+                    return fetch(`https://doc-house-server-rust.vercel.app/doctor-profile/${params.id}`)
                 }
             }
         ],
@@ -86,7 +86,7 @@ const router = createBrowserRouter([
                 path: 'all-users',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
                 loader: async () => {
-                    return fetch('http://localhost:5000/usersCount')
+                    return fetch('https://doc-house-server-rust.vercel.app/usersCount')
                 }
             },
             {
@@ -97,7 +97,7 @@ const router = createBrowserRouter([
                 path: 'manage-doctors',
                 element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>,
                 loader: async () => {
-                    return fetch('http://localhost:5000/doctorsCount');
+                    return fetch('https://doc-house-server-rust.vercel.app/doctorsCount');
                 }
             },
             {

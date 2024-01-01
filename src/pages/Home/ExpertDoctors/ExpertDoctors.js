@@ -9,7 +9,7 @@ const ExpertDoctors = () => {
     const { data: expertDoctors = [], isLoading, error } = useQuery({
         queryKey: ['expert-doctors'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/expert-doctors');
+            const res = await fetch('https://doc-house-server-rust.vercel.app/expert-doctors');
             const data = await res.json();
             return data;
         }

@@ -10,7 +10,7 @@ const AvailableAppointment = ({ date }) => {
     const [treatment, setTreatment] = useState(null);
 
     const formatDate = format(date, 'PP');
-    const url = `http://localhost:5000/available?date=${formatDate}`;
+    const url = `https://doc-house-server-rust.vercel.app/available?date=${formatDate}`;
 
     const { data: services, isLoading, error, refetch } = useQuery({
         queryKey: ['available', formatDate],
