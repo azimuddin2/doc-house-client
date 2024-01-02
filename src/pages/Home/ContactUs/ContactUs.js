@@ -18,7 +18,7 @@ const ContactUs = () => {
                             </p>
                             <p className='flex items-center mb-2'>
                                 <MdOutlineMarkEmailUnread className='text-xl mr-2'></MdOutlineMarkEmailUnread>
-                                <span className='text-sm'>mohammadazimuddin274@gmail.coms</span>
+                                <span className='text-sm'>mohammadazimuddin274@gmail.com</span>
                             </p>
                             <p className='flex items-center'>
                                 <HiOutlineLocationMarker className='text-xl mr-2'></HiOutlineLocationMarker>

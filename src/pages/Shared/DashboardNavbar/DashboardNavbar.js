@@ -34,7 +34,7 @@ const DashboardNavbar = () => {
                     </label>
                 </div>
                 <Link to={'/'}>
-                    <img src={logo} alt="logo" className='w-full' style={{ height: '40px' }} />
+                    <img src={logo} alt="logo" className='w-full lg:h-10' />
                 </Link>
             </div>
             <div className="navbar-end">
