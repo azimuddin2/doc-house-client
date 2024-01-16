@@ -11,6 +11,7 @@ import logo from '../../../assets/Images/dark-logo.png';
 import './Login.css';
 import useAuth from '../../../hooks/useAuth';
 import swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 const Login = () => {
     useTitle('Login');
@@ -70,11 +71,23 @@ const Login = () => {
             })
     };
 
-    swal({
-        title: "Admin Access🔥",
-        text: "📧Email: admin@gmail.com & 🔑Password: 123456@",
+    Swal.fire({
         icon: "info",
-        button: "Close",
+        title: "Admin Access🔥",
+        html: `
+            <div>
+                <p class="block text-left ml-2 text-lg font-medium text-slate-700">Email</p>
+                <input value="admin@gmail.com" id="email" readOnly class="input input-bordered w-full focus:outline-none text-lg"/>
+           </div>
+            <div class="mt-3">
+                <p class="block text-left ml-2 text-lg font-medium text-slate-700">Password</p>
+                <input value="123456@" id="password" readOnly class="input input-bordered w-full focus:outline-none text-lg"/>
+           </div>
+        `,
+        showConfirmButton: false,
+        showCancelButton: true,
+        cancelButtonText: 'Close',
+        cancelButtonColor: '#07332F',
     });
 
     return (
