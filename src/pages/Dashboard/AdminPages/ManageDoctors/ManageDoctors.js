@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
@@ -13,7 +12,6 @@ import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
 const ManageDoctors = () => {
     useTitle('Manage Doctors');
-    const [axiosSecure] = useAxiosSecure();
     const { doctorsCount } = useLoaderData();
     const searchRef = useRef();
     const [search, setSearch] = useState('');
@@ -41,8 +39,13 @@ const ManageDoctors = () => {
     const { data: doctors = [], isLoading, error, refetch } = useQuery({
         queryKey: ['doctors', currentPage, limitPerPage, search],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/doctors?page=${currentPage}&limit=${limitPerPage}&search=${search}`);
-            return res.data;
+            const res = await fetch(`http://localhost:5000/doctors?page=${currentPage}&limit=${limitPerPage}&search=${search}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            });
+            const data = await res.json();
+            return data;
         }
     })
 

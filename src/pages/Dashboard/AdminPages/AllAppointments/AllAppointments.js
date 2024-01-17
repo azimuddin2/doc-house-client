@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
@@ -12,15 +11,19 @@ import useTitle from '../../../../hooks/useTitle';
 
 const AllAppointments = () => {
     useTitle('All Appointments');
-    const [axiosSecure] = useAxiosSecure();
     const [selectDate, setSelectDate] = useState(new Date());
     const formatDate = format(selectDate, 'PP');
 
     const { data: allAppointments = [], isLoading, error, refetch } = useQuery({
         queryKey: ['bookings', formatDate],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/bookings?date=${formatDate}`)
-            return res.data;
+            const res = await fetch(`http://localhost:5000/bookings?date=${formatDate}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            });
+            const data = await res.json();
+            return data;
         }
     })
 

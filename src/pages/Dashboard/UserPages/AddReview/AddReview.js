@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useTitle from '../../../../hooks/useTitle';
 import { useForm } from 'react-hook-form';
 import swal from 'sweetalert';
@@ -15,7 +14,6 @@ import { useNavigate } from 'react-router-dom';
 const AddReview = () => {
     useTitle('Add Review');
     const { user } = useAuth();
-    const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const [countries, setCountries] = useState([]);
     const [rating, setRating] = useState(0);
@@ -41,7 +39,15 @@ const AddReview = () => {
             description,
             image: user?.photoURL || null
         };
-        axiosSecure.post('/reviews', reviewInfo)
+        fetch('http://localhost:5000/reviews', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('access-token')}`
+            },
+            body: JSON.stringify(reviewInfo)
+        })
+            .then(res => res.json())
             .then(result => {
                 if (result.data.insertedId) {
                     reset();

@@ -4,7 +4,6 @@ import useAuth from '../../../../hooks/useAuth';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import Booking from './Booking';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import PaymentModal from '../PaymentModal/PaymentModal';
 import useTitle from '../../../../hooks/useTitle';
 import appointmentGif from '../../../../assets/Images/appointment.gif';
@@ -13,16 +12,19 @@ import { LuCalendarClock } from 'react-icons/lu';
 
 const MyAppointment = () => {
     useTitle('My Appointment');
-    const { user, loading } = useAuth();
-    const [axiosSecure] = useAxiosSecure();
+    const { user } = useAuth();
     const [payment, setPayment] = useState(null);
 
     const { data: bookings = [], error, isLoading, refetch } = useQuery({
         queryKey: ['booking', user?.email],
-        enabled: !loading,
         queryFn: async () => {
-            const res = await axiosSecure.get(`/booking?email=${user?.email}`);
-            return res.data;
+            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            });
+            const data = await res.json();
+            return data;
         }
     })
 

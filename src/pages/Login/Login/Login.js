@@ -11,16 +11,24 @@ import logo from '../../../assets/Images/dark-logo.png';
 import './Login.css';
 import useAuth from '../../../hooks/useAuth';
 import swal from 'sweetalert';
-import Swal from 'sweetalert2';
+// import Swal from 'sweetalert2';
+import useToken from '../../../hooks/useToken';
 
 const Login = () => {
     useTitle('Login');
     const { signIn } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
 
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
+
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -33,13 +41,13 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 saveUserDatabase(user.displayName, user.email);
+                setLoginUserEmail(user.email);
                 form.reset();
                 swal({
                     title: "User Login Successful!",
                     text: `Welcome - ${user?.displayName}`,
                     icon: "success",
                 });
-                navigate(from, { replace: true });
             })
             .catch((error) => {
                 swal({
@@ -56,7 +64,7 @@ const Login = () => {
             name,
             email
         };
-        fetch('https://doc-house-server-rust.vercel.app/users', {
+        fetch('http://localhost:5000/users', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -71,24 +79,24 @@ const Login = () => {
             })
     };
 
-    Swal.fire({
-        icon: "info",
-        title: "Admin Access🔥",
-        html: `
-            <div>
-                <p class="block text-left ml-2 text-lg font-medium text-slate-700">Email</p>
-                <input value="admin@gmail.com" id="email" readOnly class="input input-bordered w-full focus:outline-none text-lg"/>
-           </div>
-            <div class="mt-3">
-                <p class="block text-left ml-2 text-lg font-medium text-slate-700">Password</p>
-                <input value="123456@" id="password" readOnly class="input input-bordered w-full focus:outline-none text-lg"/>
-           </div>
-        `,
-        showConfirmButton: false,
-        showCancelButton: true,
-        cancelButtonText: 'Close',
-        cancelButtonColor: '#07332F',
-    });
+    // Swal.fire({
+    //     icon: "info",
+    //     title: "Admin Access🔥",
+    //     html: `
+    //         <div>
+    //             <p class="block text-left ml-2 text-lg font-medium text-slate-700">Email</p>
+    //             <input value="admin@gmail.com" id="email" readOnly class="input input-bordered w-full focus:outline-none text-lg"/>
+    //        </div>
+    //         <div class="mt-3">
+    //             <p class="block text-left ml-2 text-lg font-medium text-slate-700">Password</p>
+    //             <input value="123456@" id="password" readOnly class="input input-bordered w-full focus:outline-none text-lg"/>
+    //        </div>
+    //     `,
+    //     showConfirmButton: false,
+    //     showCancelButton: true,
+    //     cancelButtonText: 'Close',
+    //     cancelButtonColor: '#07332F',
+    // });
 
     return (
         <section className='grid grid-cols-1 lg:grid-cols-2'>

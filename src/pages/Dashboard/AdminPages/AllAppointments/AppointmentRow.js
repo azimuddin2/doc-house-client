@@ -1,11 +1,9 @@
 import React from 'react';
 import { GoCheckCircleFill } from 'react-icons/go';
 import { MdAutoDelete } from 'react-icons/md';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import swal from 'sweetalert';
 
 const AppointmentRow = ({ index, appointment, refetch }) => {
-    const [axiosSecure] = useAxiosSecure();
     const { patientName, patientEmail, treatment, date, slot, price, paid } = appointment;
 
     const handleDelete = (appointment) => {
@@ -18,7 +16,13 @@ const AppointmentRow = ({ index, appointment, refetch }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    axiosSecure.delete(`/booking/${appointment._id}`)
+                    fetch(`http://localhost:5000/booking/${appointment._id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem('access-token')}`
+                        }
+                    })
+                        .then(res => res.json())
                         .then(result => {
                             if (result.data.deletedCount > 0) {
                                 refetch();

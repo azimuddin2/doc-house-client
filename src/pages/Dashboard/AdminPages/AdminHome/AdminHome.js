@@ -3,7 +3,6 @@ import useTitle from '../../../../hooks/useTitle';
 import { HiOutlineDocumentChartBar, HiOutlineUserGroup, HiOutlineUsers } from "react-icons/hi2";
 import CountUp from 'react-countup';
 import ProgressBar from "@ramonak/react-progress-bar";
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { useQuery } from '@tanstack/react-query';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
@@ -11,13 +10,17 @@ import DashboardCharts from './DashboardCharts';
 
 const AdminHome = () => {
     useTitle('Dashboard');
-    const [axiosSecure] = useAxiosSecure();
 
     const { data: stats = {}, isLoading, error } = useQuery({
         queryKey: ['admin-stats'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/admin-stats');
-            return res.data;
+            const res = await fetch('http://localhost:5000/admin-stats', {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            });
+            const data = await res.json();
+            return data;
         }
     })
 

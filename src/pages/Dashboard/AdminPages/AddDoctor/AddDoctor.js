@@ -5,14 +5,12 @@ import { IoIosArrowDown } from "react-icons/io";
 import { BsCheck2Circle } from "react-icons/bs";
 import uploadPhoto from '../../../../assets/Icons/upload-photo.svg';
 import Title from '../../../../components/Title/Title';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import useTitle from '../../../../hooks/useTitle';
 
 const AddDoctor = () => {
     useTitle('Add Doctor');
-    const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
 
@@ -48,7 +46,15 @@ const AddDoctor = () => {
                         specialty,
                         image: imgURL
                     };
-                    axiosSecure.post('/doctors', addNewDoctor)
+                    fetch('http://localhost:5000/doctors', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `bearer ${localStorage.getItem('access-token')}`
+                        },
+                        body: JSON.stringify(addNewDoctor)
+                    })
+                        .then(res => res.json())
                         .then(result => {
                             if (result.data.insertedId) {
                                 reset();

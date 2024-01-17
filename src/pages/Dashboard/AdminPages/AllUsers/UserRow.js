@@ -1,14 +1,18 @@
 import React from 'react';
 import { RiAdminLine, RiDeleteBin5Line } from 'react-icons/ri';
 import swal from 'sweetalert';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 
 const UserRow = ({ index, user, refetch }) => {
-    const [axiosSecure] = useAxiosSecure();
     const { image, name, email, role } = user;
 
     const handleMakeAdmin = (user) => {
-        axiosSecure.patch(`/users/admin/${user._id}`)
+        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+            method: 'PATCH',
+            headers: {
+                authorization: `bearer ${localStorage.getItem('access-token')}`
+            }
+        })
+            .then(res => res.json())
             .then(result => {
                 if (result.data.modifiedCount) {
                     refetch();
@@ -32,7 +36,13 @@ const UserRow = ({ index, user, refetch }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    axiosSecure.delete(`/users/${user._id}`)
+                    fetch(`http://localhost:5000/users/${user._id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem('access-token')}`
+                        }
+                    })
+                        .then(res => res.json())
                         .then(result => {
                             console.log(result);
                             if (result.data.deletedCount > 0) {

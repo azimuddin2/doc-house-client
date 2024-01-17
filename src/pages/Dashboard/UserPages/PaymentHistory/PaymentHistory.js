@@ -1,5 +1,4 @@
 import React from 'react';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import useAuth from '../../../../hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
@@ -12,14 +11,18 @@ import { FiArrowRightCircle } from "react-icons/fi";
 
 const PaymentHistory = () => {
     useTitle('Payment History');
-    const [axiosSecure] = useAxiosSecure();
     const { user } = useAuth();
 
     const { data: payments = [], isLoading, error } = useQuery({
         queryKey: ['payments', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/payments?email=${user?.email}`)
-            return res.data;
+            const res = await fetch(`http://localhost:5000/payments?email=${user?.email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            });
+            const data = await res.json();
+            return data;
         }
     })
 

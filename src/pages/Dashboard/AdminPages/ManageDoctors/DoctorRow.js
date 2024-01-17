@@ -1,10 +1,8 @@
 import React from 'react';
 import { RiDeleteBin5Line } from 'react-icons/ri';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import swal from 'sweetalert';
 
 const DoctorRow = ({ index, doctor, refetch }) => {
-    const [axiosSecure] = useAxiosSecure();
     const { image, name, email, specialty } = doctor;
 
     const handleDelete = (doctor) => {
@@ -17,7 +15,13 @@ const DoctorRow = ({ index, doctor, refetch }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    axiosSecure.delete(`/doctors/${doctor._id}`)
+                    fetch(`http://localhost:5000/doctors/${doctor._id}`, {
+                        method: 'DELETE',
+                        headers: {
+                            authorization: `bearer ${localStorage.getItem('access-token')}`
+                        }
+                    })
+                        .then(res => res.json())
                         .then(result => {
                             if (result.data.deletedCount > 0) {
                                 refetch();

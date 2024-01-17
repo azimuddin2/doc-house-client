@@ -6,14 +6,12 @@ import Button from '../../../../components/Button/Button';
 import { FiCheckCircle } from 'react-icons/fi';
 import Title from '../../../../components/Title/Title';
 import uploadIcon from '../../../../assets/Icons/upload-photo.svg';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import swal from 'sweetalert';
 import useTitle from '../../../../hooks/useTitle';
 
 const EditProfile = () => {
     useTitle('Edit Profile');
     const { user, updateUserProfile } = useAuth();
-    const [axiosSecure] = useAxiosSecure();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     const imgHostingToken = process.env.REACT_APP_Image_Upload_Token;
@@ -43,7 +41,15 @@ const EditProfile = () => {
                         email: user?.email,
                         image: imgURL
                     };
-                    axiosSecure.put('/users', updateInfo)
+                    fetch('http://localhost:5000/users', {
+                        method: 'PUT',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `bearer ${localStorage.getItem('access-token')}`
+                        },
+                        body: JSON.stringify(updateInfo)
+                    })
+                        .then(res => res.json())
                         .then(result => {
                             if (result.data.modifiedCount) {
                                 reset();

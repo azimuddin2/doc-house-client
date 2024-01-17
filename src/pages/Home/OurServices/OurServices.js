@@ -14,7 +14,7 @@ const OurServices = () => {
     const { data: services, isLoading, error } = useQuery({
         queryKey: ['our-services'],
         queryFn: async () => {
-            const res = await fetch('https://doc-house-server-rust.vercel.app/our-services');
+            const res = await fetch('http://localhost:5000/our-services');
             const data = await res.json();
             return data;
         }

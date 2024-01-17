@@ -3,25 +3,31 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '../../../../hooks/useAuth';
 import './CheckoutForm.css';
 import { toast } from 'react-toastify';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import swal from 'sweetalert';
 
 const CheckoutForm = ({ refetch, payment, setPayment }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useAuth();
-    const [axiosSecure] = useAxiosSecure();
     const [clientSecret, setClientSecret] = useState('');
     const [processing, setProcessing] = useState(false);
     const { _id, patientName, treatment, price } = payment;
 
     useEffect(() => {
-        axiosSecure.post('/create-payment-intent', { price })
+        fetch('http://localhost:5000/create-payment-intent', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('access-token')}`
+            },
+            body: JSON.stringify({ price })
+        })
+            .then(res => res.json())
             .then(result => {
                 console.log(result.data.clientSecret);
                 setClientSecret(result.data.clientSecret);
             })
-    }, [])
+    }, [price])
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -83,7 +89,15 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
                 treatmentId: _id,
                 status: 'pending',
             };
-            axiosSecure.patch(`/booking/${_id}`, paymentInfo)
+            fetch(`http://localhost:5000/booking/${_id}`, {
+                method: 'PATCH',
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                },
+                body: JSON.stringify(paymentInfo)
+            })
+                .then(res => res.json())
                 .then(result => {
                     console.log(result)
                     if (result.data.insertedId) {

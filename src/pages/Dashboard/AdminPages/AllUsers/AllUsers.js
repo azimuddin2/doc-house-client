@@ -3,7 +3,6 @@ import React, { useRef, useState } from 'react';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import UserRow from './UserRow';
-import useAxiosSecure from '../../../../hooks/useAxiosSecure';
 import { IoSearch } from 'react-icons/io5';
 import { useLoaderData } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
@@ -11,7 +10,6 @@ import useTitle from '../../../../hooks/useTitle';
 
 const AllUsers = () => {
     useTitle('All Users');
-    const [axiosSecure] = useAxiosSecure();
     const searchRef = useRef();
     const [search, setSearch] = useState('');
     const { usersCount } = useLoaderData();
@@ -39,8 +37,13 @@ const AllUsers = () => {
     const { data: users, isLoading, error, refetch } = useQuery({
         queryKey: ['users', currentPage, usersPerPage, search],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/users?page=${currentPage}&limit=${usersPerPage}&search=${search}`);
-            return res.data;
+            const res = await fetch(`http://localhost:5000/users?page=${currentPage}&limit=${usersPerPage}&search=${search}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            });
+            const data = await res.json();
+            return data;
         }
     })
 
