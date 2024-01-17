@@ -1,23 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
-import useAuth from "./useAuth";
+import { useEffect, useState } from "react";
 
-const useAdmin = () => {
-    const { user } = useAuth();
+const useAdmin = (email) => {
+    const [isAdmin, setIsAdmin] = useState(false);
+    const [isAdminLoading, setIsAdminLoading] = useState(true);
 
-    const { data: isAdmin = [], isLoading: isAdminLoading } = useQuery({
-        queryKey: ['isAdmin', user?.email],
-        queryFn: async () => {
-            if (user) {
-                const res = await fetch(`http://localhost:5000/users/admin/${user?.email}`, {
-                    headers: {
-                        authorization: `bearer ${localStorage.getItem('access-token')}`
+    useEffect(() => {
+        if (email) {
+            fetch(`http://localhost:5000/users/admin/${email}`, {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('access-token')}`
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.admin) {
+                        setIsAdmin(data.admin);
+                        setIsAdminLoading(false);
                     }
-                });
-                const data = await res.json();
-                return data.admin;
-            }
+                })
         }
-    })
+    }, [email])
 
     return [isAdmin, isAdminLoading];
 }

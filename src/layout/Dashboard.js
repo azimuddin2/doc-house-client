@@ -10,9 +10,11 @@ import { AiOutlineHome } from "react-icons/ai";
 import DashboardNavbar from '../pages/Shared/DashboardNavbar/DashboardNavbar';
 import logo from '../assets/Images/dark-logo.png';
 import useAdmin from '../hooks/useAdmin';
+import useAuth from '../hooks/useAuth';
 
 const Dashboard = () => {
-    const [isAdmin] = useAdmin();
+    const {user} = useAuth();
+    const [isAdmin] = useAdmin(user?.email);
 
     return (
         <div>

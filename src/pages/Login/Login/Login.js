@@ -26,10 +26,6 @@ const Login = () => {
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
 
-    if (token) {
-        navigate(from, { replace: true });
-    }
-
     const handleSubmit = (event) => {
         event.preventDefault();
         const form = event.target;
@@ -78,6 +74,10 @@ const Login = () => {
                 }
             })
     };
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     // Swal.fire({
     //     icon: "info",

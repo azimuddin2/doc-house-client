@@ -6,7 +6,7 @@ import Loading from '../pages/Shared/Loading/Loading';
 
 const AdminRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    const [isAdmin, isAdminLoading] = useAdmin();
+    const [isAdmin, isAdminLoading] = useAdmin(user?.email);
     const location = useLocation();
 
     if (loading || isAdminLoading) {

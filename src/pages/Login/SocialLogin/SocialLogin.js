@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { useLocation, useNavigate } from 'react-router-dom';
 import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth';
+import useToken from '../../../hooks/useToken';
 
 const SocialLogin = () => {
     const { signInWithGoogle } = useAuth();
+    const [loginUserEmail, setLoginUserEmail] = useState('');
+    const [token] = useToken(loginUserEmail);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -20,12 +23,12 @@ const SocialLogin = () => {
                 const user = result.user;
                 console.log(user);
                 saveUserDatabase(user.displayName, user.email);
+                setLoginUserEmail(user.email);
                 swal({
                     title: "User Login Successful!",
                     text: `Welcome - ${user?.displayName}`,
                     icon: "success",
                 });
-                navigate(from, { replace: true });
             })
             .catch(error => {
                 swal({
@@ -56,6 +59,10 @@ const SocialLogin = () => {
                 }
             })
     };
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     return (
         <div className='px-4 md:px-10 lg:px-10 mt-3'>
