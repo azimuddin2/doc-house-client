@@ -6,7 +6,7 @@ const Testimonial = ({ testimonial }) => {
     const { image, name, location, description, rating } = testimonial;
 
     return (
-        <div className="card p-6 border mt-20 lg:mt-8 ">
+        <div className="card w-full p-6 border mt-20 lg:mt-8 ">
             <div className='flex items-center justify-between'>
                 <div className='md:flex items-center'>
                     {
@@ -23,7 +23,7 @@ const Testimonial = ({ testimonial }) => {
                                 </div>
                             </div>
                     }
-                    <div className='ml-5'>
+                    <div className='ml-5 mt-1 lg:mt-0'>
                         <h2 className='text-base lg:text-xl font-bold text-neutral'>{name}</h2>
                         <p className='font-semibold text-accent'>{location}</p>
                     </div>

@@ -4,12 +4,15 @@ import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import UserRow from './UserRow';
 import { IoSearch } from 'react-icons/io5';
-import { useLoaderData } from 'react-router-dom';
+import { useLoaderData, useNavigate } from 'react-router-dom';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import useTitle from '../../../../hooks/useTitle';
+import useAuth from '../../../../hooks/useAuth';
 
 const AllUsers = () => {
     useTitle('All Users');
+    const { logout } = useAuth();
+    const navigate = useNavigate();
     const searchRef = useRef();
     const [search, setSearch] = useState('');
     const { usersCount } = useLoaderData();
@@ -42,21 +45,28 @@ const AllUsers = () => {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
             });
-            const data = await res.json();
-            return data;
+            if (res.status === 401 || res.status === 403) {
+                logout();
+                localStorage.removeItem('access-token');
+                navigate('/login');
+            }
+            else {
+                const data = await res.json();
+                return data;
+            }
         }
     })
-
-    if (error) {
-        return <ErrorElement message={error.message}></ErrorElement>
-    }
 
     if (isLoading) {
         return <Loading></Loading>
     }
 
+    if (error) {
+        return <ErrorElement message={error.message}></ErrorElement>
+    }
+
     return (
-        <div className='bg-[#F1F5F9] h-full py-12 lg:py-20'>
+        <div className='bg-[#F1F5F9] min-h-screen py-12 lg:py-20'>
             <div className='w-11/12 lg:w-3/4 mx-auto bg-white p-5 lg:p-10'>
                 <div>
                     <div className='lg:flex items-center justify-between mb-3 lg:mb-5'>

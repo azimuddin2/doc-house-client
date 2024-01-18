@@ -1,7 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { MdOutlineErrorOutline } from 'react-icons/md';
-import { IoIosArrowDown } from "react-icons/io";
 import { BsCheck2Circle } from "react-icons/bs";
 import uploadPhoto from '../../../../assets/Icons/upload-photo.svg';
 import Title from '../../../../components/Title/Title';
@@ -56,7 +55,7 @@ const AddDoctor = () => {
                     })
                         .then(res => res.json())
                         .then(result => {
-                            if (result.data.insertedId) {
+                            if (result.insertedId) {
                                 reset();
                                 swal({
                                     title: "Doctor added successfully",
@@ -67,7 +66,7 @@ const AddDoctor = () => {
                             }
                             else {
                                 swal({
-                                    title: `${result.data.message}`,
+                                    title: `${result.message}`,
                                     icon: "warning",
                                 });
                             }
@@ -100,7 +99,6 @@ const AddDoctor = () => {
                             {errors.name?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.name.message}</span>}
                         </label>
                     </div>
-
                     <div className="form-control">
                         <label className="label">
                             <span className="label-text font-bold">Email*</span>
@@ -120,15 +118,14 @@ const AddDoctor = () => {
                             {errors.email?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.email.message}</span>}
                         </label>
                     </div>
-
-                    <div className="form-control relative">
+                    <div className="form-control">
                         <label className="label" >
                             <span className="label-text font-bold">Specialty*</span>
                         </label>
                         <select
                             {...register("specialty")}
                             type='text'
-                            className="input rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                            className="select rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                         >
                             {
                                 specialtys.map((specialty, index) => <option
@@ -137,9 +134,7 @@ const AddDoctor = () => {
                                 >{specialty}</option>)
                             }
                         </select>
-                        <IoIosArrowDown className='text-xl mr-3 absolute right-1 top-12' />
                     </div>
-
                     <div className="form-control w-full my-5">
                         <label
                             htmlFor='image'
@@ -165,7 +160,6 @@ const AddDoctor = () => {
                             {errors.image?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.image.message}</span>}
                         </label>
                     </div>
-
                     <button className='btn btn-primary text-white text-lg w-full'>Save <BsCheck2Circle className='text-xl' /></button>
                 </form>
             </div>

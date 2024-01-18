@@ -83,7 +83,7 @@ const Login = () => {
     if (adminAccess === true) {
         Swal.fire({
             icon: "info",
-            title: "Admin Access🔥",
+            title: "Admin Access🔐",
             html: `
             <div>
                 <p class="block text-left ml-2 text-lg font-medium text-slate-700">Email</p>

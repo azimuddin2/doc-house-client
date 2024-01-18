@@ -62,7 +62,7 @@ const ManageDoctors = () => {
             {
                 doctors.length > 0 ?
                     (
-                        <div className='bg-[#F1F5F9] h-full py-12 lg:py-20'>
+                        <div className='bg-[#F1F5F9] min-h-screen py-12 lg:py-20'>
                             <div className='w-11/12 lg:w-3/4 mx-auto bg-white p-5 lg:p-10'>
                                 <div>
                                     <div className='lg:flex items-center justify-between mb-3 lg:mb-5'>

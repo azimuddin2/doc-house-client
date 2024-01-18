@@ -26,12 +26,12 @@ const AdminHome = () => {
 
     const { doctors, patients, appointments } = stats;
 
-    if (error) {
-        return <ErrorElement message={error.message}></ErrorElement>
+    if (isLoading) {
+        return <Loading></Loading>
     }
 
-    else if (isLoading) {
-        return <Loading></Loading>
+    if (error) {
+        return <ErrorElement message={error.message}></ErrorElement>
     }
 
     return (

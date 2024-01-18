@@ -1,8 +1,13 @@
 import React from 'react';
 import { RiAdminLine, RiDeleteBin5Line } from 'react-icons/ri';
 import swal from 'sweetalert';
+import useAuth from '../../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const UserRow = ({ index, user, refetch }) => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
     const { image, name, email, role } = user;
 
     const handleMakeAdmin = (user) => {
@@ -12,9 +17,16 @@ const UserRow = ({ index, user, refetch }) => {
                 authorization: `bearer ${localStorage.getItem('access-token')}`
             }
         })
-            .then(res => res.json())
+            .then(res => {
+                if (res.status === 401 || res.status === 403) {
+                    logout();
+                    localStorage.removeItem('access-token');
+                    navigate('/login');
+                }
+                return res.json()
+            })
             .then(result => {
-                if (result.data.modifiedCount) {
+                if (result.modifiedCount) {
                     refetch();
                     swal({
                         icon: 'success',
@@ -42,10 +54,17 @@ const UserRow = ({ index, user, refetch }) => {
                             authorization: `bearer ${localStorage.getItem('access-token')}`
                         }
                     })
-                        .then(res => res.json())
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                logout();
+                                localStorage.removeItem('access-token');
+                                navigate('/login');
+                            }
+                            return res.json()
+                        })
                         .then(result => {
                             console.log(result);
-                            if (result.data.deletedCount > 0) {
+                            if (result.deletedCount > 0) {
                                 refetch();
                                 swal({
                                     text: `${user.email} has been deleted!`,

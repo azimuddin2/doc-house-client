@@ -24,7 +24,7 @@ const AppointmentRow = ({ index, appointment, refetch }) => {
                     })
                         .then(res => res.json())
                         .then(result => {
-                            if (result.data.deletedCount > 0) {
+                            if (result.deletedCount > 0) {
                                 refetch();
                                 swal({
                                     text: `Appointment ${appointment.treatment} has been deleted!`,
