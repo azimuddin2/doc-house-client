@@ -11,11 +11,15 @@ import logo from '../../../assets/Images/dark-logo.png';
 import './SignUp.css';
 import swal from 'sweetalert';
 import useAuth from '../../../hooks/useAuth';
+import useToken from '../../../hooks/useToken';
 
 const SignUp = () => {
     useTitle('SignUp');
     const { createUser, updateUserProfile } = useAuth();
     const [showPassword, setShowPassword] = useState(false);
+
+    const [signupUserEmail, setSignupUserEmail] = useState('');
+    const [token] = useToken(signupUserEmail);
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -40,7 +44,6 @@ const SignUp = () => {
                     text: `Welcome - ${name}`,
                     icon: "success",
                 });
-                navigate(from, { replace: true });
             })
             .catch((error) => {
                 swal({
@@ -83,10 +86,14 @@ const SignUp = () => {
             .then(res => res.json())
             .then(result => {
                 if (result.insertedId) {
-
+                    setSignupUserEmail(email);
                 }
             })
     };
+
+    if (token) {
+        navigate(from, { replace: true });
+    }
 
     return (
         <section className='grid grid-cols-1 lg:grid-cols-2'>

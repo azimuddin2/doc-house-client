@@ -105,7 +105,7 @@ const ContactForm = () => {
                     <select
                         name='time'
                         style={{ background: "rgba(255, 255, 255, 0.05)" }}
-                        className="input input-bordered w-full focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
+                        className="select select-bordered text-white w-full focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary"
                     >
                         {
                             times.map((time, index) => <option
