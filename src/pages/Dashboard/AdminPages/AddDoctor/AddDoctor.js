@@ -7,9 +7,11 @@ import Title from '../../../../components/Title/Title';
 import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import useTitle from '../../../../hooks/useTitle';
+import useAuth from '../../../../hooks/useAuth';
 
 const AddDoctor = () => {
     useTitle('Add Doctor');
+    const { logout } = useAuth();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
 
@@ -53,7 +55,14 @@ const AddDoctor = () => {
                         },
                         body: JSON.stringify(addNewDoctor)
                     })
-                        .then(res => res.json())
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                logout();
+                                localStorage.removeItem('access-token');
+                                navigate('/login');
+                            }
+                            return res.json()
+                        })
                         .then(result => {
                             if (result.insertedId) {
                                 reset();

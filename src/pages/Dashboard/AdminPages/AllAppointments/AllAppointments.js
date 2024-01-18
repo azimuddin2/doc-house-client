@@ -8,9 +8,13 @@ import { MdOutlineDateRange } from 'react-icons/md';
 import { format } from 'date-fns';
 import searchGif from '../../../../assets/Images/search.gif';
 import useTitle from '../../../../hooks/useTitle';
+import useAuth from '../../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const AllAppointments = () => {
     useTitle('All Appointments');
+    const { logout } = useAuth();
+    const navigate = useNavigate();
     const [selectDate, setSelectDate] = useState(new Date());
     const formatDate = format(selectDate, 'PP');
 
@@ -21,18 +25,23 @@ const AllAppointments = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
-            });
-            const data = await res.json();
+            })
+            if (res.status === 401 || res.status === 403) {
+                logout();
+                localStorage.removeItem('access-token');
+                navigate('/login');
+            }
+            const data = await res.json()
             return data;
         }
     })
 
-    if (error) {
-        return <ErrorElement message={error.message}></ErrorElement>
-    }
-
     if (isLoading) {
         return <Loading></Loading>
+    }
+
+    if (error) {
+        return <ErrorElement message={error.message}></ErrorElement>
     }
 
     return (

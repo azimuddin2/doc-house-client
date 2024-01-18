@@ -7,9 +7,13 @@ import { useQuery } from '@tanstack/react-query';
 import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import DashboardCharts from './DashboardCharts';
+import useAuth from '../../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const AdminHome = () => {
     useTitle('Dashboard');
+    const { logout } = useAuth();
+    const navigate = useNavigate();
 
     const { data: stats = {}, isLoading, error } = useQuery({
         queryKey: ['admin-stats'],
@@ -18,7 +22,12 @@ const AdminHome = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
-            });
+            })
+            if (res.status === 401 || res.status === 403) {
+                logout();
+                localStorage.removeItem('access-token');
+                navigate('/login');
+            }
             const data = await res.json();
             return data;
         }
@@ -35,7 +44,7 @@ const AdminHome = () => {
     }
 
     return (
-        <div className='bg-[#F1F5F9] h-full px-5 py-12  lg:p-12'>
+        <div className='bg-[#F1F5F9] min-h-screen px-5 py-12  lg:p-12'>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 <div className='bg-white p-8 rounded-lg'>
                     <div className='flex items-center'>

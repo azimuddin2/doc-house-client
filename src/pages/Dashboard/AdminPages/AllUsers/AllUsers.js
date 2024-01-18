@@ -44,16 +44,14 @@ const AllUsers = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
-            });
+            })
             if (res.status === 401 || res.status === 403) {
                 logout();
                 localStorage.removeItem('access-token');
                 navigate('/login');
             }
-            else {
-                const data = await res.json();
-                return data;
-            }
+            const data = await res.json()
+            return data;
         }
     })
 

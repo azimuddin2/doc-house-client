@@ -2,8 +2,13 @@ import React from 'react';
 import { GoCheckCircleFill } from 'react-icons/go';
 import { MdAutoDelete } from 'react-icons/md';
 import swal from 'sweetalert';
+import useAuth from '../../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const AppointmentRow = ({ index, appointment, refetch }) => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
     const { patientName, patientEmail, treatment, date, slot, price, paid } = appointment;
 
     const handleDelete = (appointment) => {
@@ -22,7 +27,14 @@ const AppointmentRow = ({ index, appointment, refetch }) => {
                             authorization: `bearer ${localStorage.getItem('access-token')}`
                         }
                     })
-                        .then(res => res.json())
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                logout();
+                                localStorage.removeItem('access-token');
+                                navigate('/login');
+                            }
+                            return res.json()
+                        })
                         .then(result => {
                             if (result.deletedCount > 0) {
                                 refetch();

@@ -4,14 +4,17 @@ import ErrorElement from '../../../Shared/ErrorElement/ErrorElement';
 import Loading from '../../../Shared/Loading/Loading';
 import DoctorRow from './DoctorRow';
 import doctorsGif from '../../../../assets/Images/doctors.gif';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from 'react-icons/fi';
 import { IoSearch } from 'react-icons/io5';
 import useTitle from '../../../../hooks/useTitle';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
+import useAuth from '../../../../hooks/useAuth';
 
 const ManageDoctors = () => {
     useTitle('Manage Doctors');
+    const { logout } = useAuth();
+    const navigate = useNavigate();
     const { doctorsCount } = useLoaderData();
     const searchRef = useRef();
     const [search, setSearch] = useState('');
@@ -43,18 +46,23 @@ const ManageDoctors = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
-            });
-            const data = await res.json();
+            })
+            if (res.status === 401 || res.status === 403) {
+                logout();
+                localStorage.removeItem('access-token');
+                navigate('/login');
+            }
+            const data = await res.json()
             return data;
         }
     })
 
-    if (error) {
-        return <ErrorElement message={error.message}></ErrorElement>
-    }
-
     if (isLoading) {
         return <Loading></Loading>
+    }
+
+    if (error) {
+        return <ErrorElement message={error.message}></ErrorElement>
     }
 
     return (

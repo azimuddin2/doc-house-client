@@ -1,8 +1,13 @@
 import React from 'react';
 import { RiDeleteBin5Line } from 'react-icons/ri';
 import swal from 'sweetalert';
+import useAuth from '../../../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const DoctorRow = ({ index, doctor, refetch }) => {
+    const { logout } = useAuth();
+    const navigate = useNavigate();
+
     const { image, name, email, specialty } = doctor;
 
     const handleDelete = (doctor) => {
@@ -21,7 +26,14 @@ const DoctorRow = ({ index, doctor, refetch }) => {
                             authorization: `bearer ${localStorage.getItem('access-token')}`
                         }
                     })
-                        .then(res => res.json())
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                logout();
+                                localStorage.removeItem('access-token');
+                                navigate('/login');
+                            }
+                            return res.json()
+                        })
                         .then(result => {
                             if (result.deletedCount > 0) {
                                 refetch();
