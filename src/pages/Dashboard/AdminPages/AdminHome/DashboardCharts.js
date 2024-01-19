@@ -1,9 +1,21 @@
 import React from 'react';
-import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { curveCardinal } from 'd3-shape';
+import {
+    Area,
+    Bar,
+    CartesianGrid,
+    Cell,
+    ComposedChart,
+    Legend,
+    Line,
+    Pie,
+    PieChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis
+} from 'recharts';
 
 const DashboardCharts = () => {
-
     const colors = ['#0088FE', '#7BB13C', '#FFBB28', '#FF8042', 'red', 'pink'];
 
     const appointmentData = [
@@ -66,74 +78,68 @@ const DashboardCharts = () => {
 
     const data = [
         {
-            name: '2018',
-            uv: 2000,
-            pv: 3800,
-            amt: 2500,
-        },
-        {
             name: '2019',
-            uv: 3000,
-            pv: 4300,
-            amt: 2100,
+            uv: 590,
+            pv: 800,
+            amt: 1400,
         },
         {
             name: '2020',
-            uv: 2700,
-            pv: 4300,
-            amt: 2100,
+            uv: 868,
+            pv: 967,
+            amt: 1506,
         },
         {
             name: '2021',
-            uv: 2000,
-            pv: 4300,
-            amt: 2100,
+            uv: 1397,
+            pv: 1098,
+            amt: 989,
         },
         {
             name: '2022',
-            uv: 3000,
-            pv: 4300,
-            amt: 2100,
+            uv: 1480,
+            pv: 1200,
+            amt: 1228,
         },
         {
             name: '2023',
-            uv: 4000,
-            pv: 4300,
-            amt: 2100,
+            uv: 1520,
+            pv: 1108,
+            amt: 1100,
         },
         {
             name: '2024',
-            uv: 1600,
-            pv: 4300,
-            amt: 2100,
+            uv: 1400,
+            pv: 680,
+            amt: 1700,
         },
     ];
-
-    const cardinal = curveCardinal.tension(0.2);
 
     return (
         <div className='grid grid-cols-1 lg:grid-cols-2 gap-4'>
             <div className='bg-white rounded-lg p-5'>
                 <h2 className='text-accent text-xl font-semibold border-b pb-3'>Patients Overview</h2>
                 <ResponsiveContainer width="100%" height={300}>
-                    <AreaChart
-                        width={'100%'}
+                    <ComposedChart
+                        width={"100%"}
                         height={400}
                         data={data}
                         margin={{
                             top: 30,
                             right: 0,
-                            left: 0,
                             bottom: 0,
+                            left: 0,
                         }}
                     >
-                        <CartesianGrid strokeDasharray="3 3" />
-                        <XAxis dataKey="name" />
+                        <CartesianGrid stroke="#f5f5f5" />
+                        <XAxis dataKey="name" scale="band" />
                         <YAxis />
                         <Tooltip />
-                        <Area type="monotone" dataKey="uv" stroke="#FFBC34" fill="#7BB13C" fillOpacity={0.3} />
-                        <Area type={cardinal} dataKey="uv" stroke="#7BB13C" fill="#82ca9d" fillOpacity={0.3} />
-                    </AreaChart>
+                        <Legend />
+                        <Area type="monotone" dataKey="amt" fill="#ffbc34a1" stroke="#FFBC34" />
+                        <Bar dataKey="pv" barSize={20} fill="#F7A582" />
+                        <Line type="monotone" dataKey="uv" stroke="#7BB13C" />
+                    </ComposedChart>
                 </ResponsiveContainer>
             </div>
             <div className='bg-white rounded-lg p-6'>

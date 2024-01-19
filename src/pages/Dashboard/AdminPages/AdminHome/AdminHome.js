@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 const AdminHome = () => {
     useTitle('Dashboard');
-    const { logout } = useAuth();
+    const { user, logout } = useAuth();
     const navigate = useNavigate();
 
     const { data: stats = {}, isLoading, error } = useQuery({
@@ -45,6 +45,7 @@ const AdminHome = () => {
 
     return (
         <div className='bg-[#F1F5F9] min-h-screen px-5 py-12  lg:p-12'>
+            <h1 className='text-xl lg:text-2xl font-medium text-center lg:text-left mb-5'>Hi Welcome {user?.displayName}👋</h1>
             <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                 <div className='bg-white p-8 rounded-lg'>
                     <div className='flex items-center'>
