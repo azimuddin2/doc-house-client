@@ -8,7 +8,6 @@ import { MdOutlineErrorOutline } from 'react-icons/md';
 import StarRatings from 'react-star-ratings';
 import Button from '../../../../components/Button/Button';
 import Title from '../../../../components/Title/Title';
-import { IoIosArrowDown } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 
 const AddReview = () => {
@@ -49,7 +48,7 @@ const AddReview = () => {
         })
             .then(res => res.json())
             .then(result => {
-                if (result.data.insertedId) {
+                if (result.insertedId) {
                     reset();
                     swal({
                         title: "Review added successfully",
@@ -99,7 +98,7 @@ const AddReview = () => {
                                 {errors.name?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.name.message}</span>}
                             </label>
                         </div>
-                        <div className="form-control relative">
+                        <div className="form-control">
                             <label className="label" >
                                 <span className="label-text font-semibold">Country*</span>
                             </label>
@@ -111,7 +110,7 @@ const AddReview = () => {
                                     }
                                 })}
                                 type='text'
-                                className="input rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+                                className="select rounded-sm focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
                             >
                                 {
                                     countries?.map(country => <option
@@ -120,7 +119,6 @@ const AddReview = () => {
                                     >{country.name.common}</option>)
                                 }
                             </select>
-                            <IoIosArrowDown className='text-xl mr-3 absolute right-1 top-12' />
                             <label className="label pt-1">
                                 {errors.location?.type === 'required' && <span className="label-text-alt text-red-500 text-sm flex items-center"><MdOutlineErrorOutline className='text-lg' style={{ marginRight: '2px' }}></MdOutlineErrorOutline>{errors.location.message}</span>}
                             </label>

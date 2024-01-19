@@ -18,7 +18,9 @@ const Navbar = () => {
 
     const handleLogout = () => {
         logout()
-            .then(() => { })
+            .then(() => {
+                localStorage.removeItem('access-token');
+            })
             .catch(error => {
                 swal({
                     title: "Oops...",

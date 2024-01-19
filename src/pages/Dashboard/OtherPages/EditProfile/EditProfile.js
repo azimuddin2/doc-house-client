@@ -8,11 +8,13 @@ import Title from '../../../../components/Title/Title';
 import uploadIcon from '../../../../assets/Icons/upload-photo.svg';
 import swal from 'sweetalert';
 import useTitle from '../../../../hooks/useTitle';
+import { useNavigate } from 'react-router-dom';
 
 const EditProfile = () => {
     useTitle('Edit Profile');
-    const { user, updateUserProfile } = useAuth();
+    const { user, updateUserProfile, logout } = useAuth();
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const navigate = useNavigate();
 
     const imgHostingToken = process.env.REACT_APP_Image_Upload_Token;
     const imgHostinURL = `https://api.imgbb.com/1/upload?key=${imgHostingToken}`;
@@ -49,9 +51,16 @@ const EditProfile = () => {
                         },
                         body: JSON.stringify(updateInfo)
                     })
-                        .then(res => res.json())
+                        .then(res => {
+                            if (res.status === 401 || res.status === 403) {
+                                logout();
+                                localStorage.removeItem('access-token');
+                                navigate('/login');
+                            }
+                            return res.json()
+                        })
                         .then(result => {
-                            if (result.data.modifiedCount) {
+                            if (result.modifiedCount) {
                                 reset();
                                 swal({
                                     title: "Profile updated successfully",

@@ -6,12 +6,13 @@ import Loading from '../../../Shared/Loading/Loading';
 import PaymentRow from './PaymentRow';
 import useTitle from '../../../../hooks/useTitle';
 import paymentGif from '../../../../assets/Images/payment.gif';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FiArrowRightCircle } from "react-icons/fi";
 
 const PaymentHistory = () => {
     useTitle('Payment History');
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
 
     const { data: payments = [], isLoading, error } = useQuery({
         queryKey: ['payments', user?.email],
@@ -20,18 +21,23 @@ const PaymentHistory = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
-            });
-            const data = await res.json();
+            })
+            if (res.status === 401 || res.status === 403) {
+                logout();
+                localStorage.removeItem('access-token');
+                navigate('/login');
+            }
+            const data = await res.json()
             return data;
         }
     })
 
-    if (error) {
-        return <ErrorElement message={error.message}></ErrorElement>
-    }
-
     if (isLoading) {
         return <Loading></Loading>
+    }
+
+    if (error) {
+        return <ErrorElement message={error.message}></ErrorElement>
     }
 
     return (
@@ -39,7 +45,7 @@ const PaymentHistory = () => {
             {
                 payments.length > 0 ?
                     (
-                        <div className='bg-[#F1F5F9] h-full py-16'>
+                        <div className='bg-[#F1F5F9] min-h-screen py-16'>
                             <div className='w-11/12 lg:w-4/5 mx-auto bg-white p-5 lg:p-10'>
                                 <div className='mb-4'>
                                     <h2 className='text-xl lg:text-2xl font-semibold text-primary'>Payment History: 0{payments?.length}</h2>

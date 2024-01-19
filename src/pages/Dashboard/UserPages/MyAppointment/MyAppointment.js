@@ -7,12 +7,13 @@ import Booking from './Booking';
 import PaymentModal from '../PaymentModal/PaymentModal';
 import useTitle from '../../../../hooks/useTitle';
 import appointmentGif from '../../../../assets/Images/appointment.gif';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { LuCalendarClock } from 'react-icons/lu';
 
 const MyAppointment = () => {
     useTitle('My Appointment');
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
+    const navigate = useNavigate();
     const [payment, setPayment] = useState(null);
 
     const { data: bookings = [], error, isLoading, refetch } = useQuery({
@@ -22,18 +23,23 @@ const MyAppointment = () => {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }
-            });
-            const data = await res.json();
+            })
+            if (res.status === 401 || res.status === 403) {
+                logout();
+                localStorage.removeItem('access-token');
+                navigate('/login');
+            }
+            const data = await res.json()
             return data;
         }
     })
 
-    if (error) {
-        return <ErrorElement message={error.message}></ErrorElement>
-    }
-
     if (isLoading) {
         return <Loading></Loading>
+    }
+
+    if (error) {
+        return <ErrorElement message={error.message}></ErrorElement>
     }
 
     return (
@@ -41,7 +47,7 @@ const MyAppointment = () => {
             {
                 bookings.length > 0 ?
                     (
-                        <div className='bg-[#F1F5F9] h-full py-16'>
+                        <div className='bg-[#F1F5F9] min-h-screen py-16'>
                             <div className='w-11/12 lg:w-4/5 mx-auto bg-white p-5 lg:p-10'>
                                 <div className='mb-4'>
                                     <h2 className='text-xl lg:text-2xl font-semibold text-primary'>My Appointment: 0{bookings?.length}</h2>

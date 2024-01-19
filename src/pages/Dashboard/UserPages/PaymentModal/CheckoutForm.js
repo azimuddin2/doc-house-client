@@ -24,8 +24,8 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
         })
             .then(res => res.json())
             .then(result => {
-                console.log(result.data.clientSecret);
-                setClientSecret(result.data.clientSecret);
+                console.log(result.clientSecret);
+                setClientSecret(result.clientSecret);
             })
     }, [price])
 
@@ -100,7 +100,7 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
                 .then(res => res.json())
                 .then(result => {
                     console.log(result)
-                    if (result.data.insertedId) {
+                    if (result.insertedId) {
                         refetch();
                         swal({
                             title: "Congratulation!",

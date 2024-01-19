@@ -13,7 +13,10 @@ const DashboardNavbar = () => {
 
     const handleLogout = () => {
         logout()
-            .then(() => { })
+            .then(() => {
+                localStorage.removeItem('access-token');
+                navigate('/login');
+            })
             .catch(error => {
                 swal({
                     title: "Oops...",
@@ -22,7 +25,6 @@ const DashboardNavbar = () => {
                     button: "Try again",
                 });
             })
-        navigate('/login');
     };
 
     return (
@@ -54,7 +56,7 @@ const DashboardNavbar = () => {
                                     </div>
                                     :
                                     <div className="avatar online placeholder">
-                                        <div className="bg-accent text-white rounded-full w-10">
+                                        <div className="bg-[#F1F5F9] text-primary rounded-full w-10">
                                             <span className="text-2xl">{user.displayName.slice(0, 1)}</span>
                                         </div>
                                     </div>
@@ -73,7 +75,7 @@ const DashboardNavbar = () => {
                                         </div>
                                         :
                                         <div className="avatar online placeholder">
-                                            <div className="bg-accent text-white rounded-full w-20">
+                                            <div className="bg-[#F1F5F9] text-primary rounded-full w-20">
                                                 <span className="text-5xl">{user.displayName.slice(0, 1)}</span>
                                             </div>
                                         </div>
@@ -83,13 +85,13 @@ const DashboardNavbar = () => {
                             <h1 className='text-md mb-3'>{user.email}</h1>
                         </div>
                         <li>
-                            <Link to={'/dashboard/edit-profile'} className="justify-between text-lg hover:bg-[#F1F5F9] hover:text-primary font-medium">
+                            <Link to={'/dashboard/edit-profile'} className="justify-between text-lg hover:bg-[#F1F5F9] hover:text-primary font-medium mb-2">
                                 Edit Profile
                                 <span className="badge"><BiSolidEdit className='text-lg' /></span>
                             </Link>
                         </li>
                         <li>
-                            <button onClick={handleLogout} className='text-lg hover:bg-[#F1F5F9] hover:text-primary font-medium'>
+                            <button onClick={handleLogout} className='text-lg bg-[#F1F5F9] text-primary hover:bg-secondary hover:text-white font-medium'>
                                 Logout
                                 <span className="badge"><CgLogOut className='text-lg' /></span>
                             </button>
