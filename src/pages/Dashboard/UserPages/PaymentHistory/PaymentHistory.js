@@ -17,7 +17,7 @@ const PaymentHistory = () => {
     const { data: payments = [], isLoading, error } = useQuery({
         queryKey: ['payments', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/payments?email=${user?.email}`, {
+            const res = await fetch(`https://doc-house-server-rust.vercel.app/payments?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }

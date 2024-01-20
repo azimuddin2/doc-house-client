@@ -47,7 +47,7 @@ const AddDoctor = () => {
                         specialty,
                         image: imgURL
                     };
-                    fetch('http://localhost:5000/doctors', {
+                    fetch('https://doc-house-server-rust.vercel.app/doctors', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

@@ -11,7 +11,7 @@ const UserRow = ({ index, user, refetch }) => {
     const { image, name, email, role } = user;
 
     const handleMakeAdmin = (user) => {
-        fetch(`http://localhost:5000/users/admin/${user._id}`, {
+        fetch(`https://doc-house-server-rust.vercel.app/users/admin/${user._id}`, {
             method: 'PATCH',
             headers: {
                 authorization: `bearer ${localStorage.getItem('access-token')}`
@@ -48,7 +48,7 @@ const UserRow = ({ index, user, refetch }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`http://localhost:5000/users/${user._id}`, {
+                    fetch(`https://doc-house-server-rust.vercel.app/users/${user._id}`, {
                         method: 'DELETE',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('access-token')}`

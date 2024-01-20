@@ -40,7 +40,7 @@ const AllUsers = () => {
     const { data: users, isLoading, error, refetch } = useQuery({
         queryKey: ['users', currentPage, usersPerPage, search],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/users?page=${currentPage}&limit=${usersPerPage}&search=${search}`, {
+            const res = await fetch(`https://doc-house-server-rust.vercel.app/users?page=${currentPage}&limit=${usersPerPage}&search=${search}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }

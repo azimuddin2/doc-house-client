@@ -14,7 +14,7 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
     const { _id, patientName, treatment, price } = payment;
 
     useEffect(() => {
-        fetch('http://localhost:5000/create-payment-intent', {
+        fetch('https://doc-house-server-rust.vercel.app/create-payment-intent', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
@@ -89,7 +89,7 @@ const CheckoutForm = ({ refetch, payment, setPayment }) => {
                 treatmentId: _id,
                 status: 'pending',
             };
-            fetch(`http://localhost:5000/booking/${_id}`, {
+            fetch(`https://doc-house-server-rust.vercel.app/booking/${_id}`, {
                 method: 'PATCH',
                 headers: {
                     'content-type': 'application/json',

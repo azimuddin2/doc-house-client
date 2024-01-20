@@ -19,7 +19,7 @@ const MyAppointment = () => {
     const { data: bookings = [], error, isLoading, refetch } = useQuery({
         queryKey: ['booking', user?.email],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/booking?email=${user?.email}`, {
+            const res = await fetch(`https://doc-house-server-rust.vercel.app/booking?email=${user?.email}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }

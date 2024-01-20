@@ -20,7 +20,7 @@ const DoctorRow = ({ index, doctor, refetch }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`http://localhost:5000/doctors/${doctor._id}`, {
+                    fetch(`https://doc-house-server-rust.vercel.app/doctors/${doctor._id}`, {
                         method: 'DELETE',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('access-token')}`

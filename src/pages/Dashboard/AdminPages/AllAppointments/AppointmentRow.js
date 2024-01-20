@@ -21,7 +21,7 @@ const AppointmentRow = ({ index, appointment, refetch }) => {
         })
             .then((willDelete) => {
                 if (willDelete) {
-                    fetch(`http://localhost:5000/booking/${appointment._id}`, {
+                    fetch(`https://doc-house-server-rust.vercel.app/booking/${appointment._id}`, {
                         method: 'DELETE',
                         headers: {
                             authorization: `bearer ${localStorage.getItem('access-token')}`

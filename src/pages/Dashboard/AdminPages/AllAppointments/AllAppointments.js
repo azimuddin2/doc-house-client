@@ -21,7 +21,7 @@ const AllAppointments = () => {
     const { data: allAppointments = [], isLoading, error, refetch } = useQuery({
         queryKey: ['bookings', formatDate],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/bookings?date=${formatDate}`, {
+            const res = await fetch(`https://doc-house-server-rust.vercel.app/bookings?date=${formatDate}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }

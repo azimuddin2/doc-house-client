@@ -42,7 +42,7 @@ const ManageDoctors = () => {
     const { data: doctors = [], isLoading, error, refetch } = useQuery({
         queryKey: ['doctors', currentPage, limitPerPage, search],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/doctors?page=${currentPage}&limit=${limitPerPage}&search=${search}`, {
+            const res = await fetch(`https://doc-house-server-rust.vercel.app/doctors?page=${currentPage}&limit=${limitPerPage}&search=${search}`, {
                 headers: {
                     authorization: `bearer ${localStorage.getItem('access-token')}`
                 }

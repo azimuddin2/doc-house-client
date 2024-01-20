@@ -26,7 +26,7 @@ const BookingModal = ({ treatment, setTreatment, date, refetch }) => {
             patientPhone: phone,
         };
 
-        fetch('http://localhost:5000/booking', {
+        fetch('https://doc-house-server-rust.vercel.app/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

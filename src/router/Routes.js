@@ -15,6 +15,7 @@ import Home from "../pages/Home/Home/Home";
 import Login from "../pages/Login/Login/Login";
 import SignUp from "../pages/Login/SignUp/SignUp";
 import Reviews from "../pages/Reviews/Reviews";
+import ErrorPage from "../pages/Shared/ErrorPage/ErrorPage";
 import AdminRoute from "./AdminRoute";
 import PrivateRoute from "./PrivateRoute";
 
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             {
                 path: '/',
@@ -43,7 +45,7 @@ const router = createBrowserRouter([
                 path: '/doctor-profile/:id',
                 element: <DoctorProfile></DoctorProfile>,
                 loader: async ({ params }) => {
-                    return fetch(`http://localhost:5000/doctor-profile/${params.id}`)
+                    return fetch(`https://doc-house-server-rust.vercel.app/doctor-profile/${params.id}`)
                 }
             }
         ],
@@ -86,7 +88,7 @@ const router = createBrowserRouter([
                 path: 'all-users',
                 element: <AdminRoute><AllUsers></AllUsers></AdminRoute>,
                 loader: async () => {
-                    return fetch('http://localhost:5000/usersCount')
+                    return await fetch('https://doc-house-server-rust.vercel.app/usersCount')
                 }
             },
             {
@@ -97,7 +99,7 @@ const router = createBrowserRouter([
                 path: 'manage-doctors',
                 element: <AdminRoute><ManageDoctors></ManageDoctors></AdminRoute>,
                 loader: async () => {
-                    return fetch('http://localhost:5000/doctorsCount');
+                    return await fetch('https://doc-house-server-rust.vercel.app/doctorsCount');
                 }
             },
             {

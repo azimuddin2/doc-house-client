@@ -43,7 +43,7 @@ const EditProfile = () => {
                         email: user?.email,
                         image: imgURL
                     };
-                    fetch('http://localhost:5000/users', {
+                    fetch('https://doc-house-server-rust.vercel.app/users', {
                         method: 'PUT',
                         headers: {
                             'content-type': 'application/json',
